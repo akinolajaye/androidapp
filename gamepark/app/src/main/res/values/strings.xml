@@ -4,4 +4,5 @@
     <string name="start_btn">Start</string>
     <string name="new_deck_lbl">Create New Deck</string>
     <string name="view_lib_lbl">View Library</string>
+    <string name="submit">Submit</string>
 </resources>

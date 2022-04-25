@@ -12,59 +12,58 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link NewDeck#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class NewDeck extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    String name_of_deck,stat1_val,stat2_val,stat3_val,stat4_val,stat5_val,stat6_val;
+    EditText deck_name,stat1,stat2,stat3,stat4,stat5,stat6;
+    Button submit_btn;
 
     public NewDeck() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment NewDeck.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static NewDeck newInstance(String param1, String param2) {
-        NewDeck fragment = new NewDeck();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_new_deck, container, false);
+    }
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        deck_name=(EditText) view.findViewById(R.id.deck_name);
+        stat1=(EditText) view.findViewById(R.id.stat_1);
+        stat2=(EditText) view.findViewById(R.id.stat_2);
+        stat3=(EditText) view.findViewById(R.id.stat_3);
+        stat4=(EditText) view.findViewById(R.id.stat_4);
+        stat5=(EditText) view.findViewById(R.id.stat_5);
+        stat6=(EditText) view.findViewById(R.id.stat_6);
+
+        submit_btn= (Button) view.findViewById(R.id.submit);
+        submit_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                name_of_deck=deck_name.getText().toString();
+                stat1_val=stat1.getText().toString();
+                stat2_val=stat2.getText().toString();
+                stat3_val=stat3.getText().toString();
+                stat4_val=stat4.getText().toString();
+                stat5_val=stat5.getText().toString();
+                stat6_val=stat6.getText().toString();
+            }
+        });
+
+
     }
 
 
