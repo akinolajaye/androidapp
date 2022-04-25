@@ -8,7 +8,11 @@
         android:id="@+id/startScreen"
         android:name="com.example.gamepark.StartScreen"
         android:label="fragment_start_screen"
-        tools:layout="@layout/fragment_start_screen" />
+        tools:layout="@layout/fragment_start_screen" >
+        <action
+            android:id="@+id/action_startScreen_to_landingScreen"
+            app:destination="@id/landingScreen" />
+    </fragment>
     <fragment
         android:id="@+id/landingScreen"
         android:name="com.example.gamepark.LandingScreen"
