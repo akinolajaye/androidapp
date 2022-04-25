@@ -17,5 +17,14 @@
         android:id="@+id/landingScreen"
         android:name="com.example.gamepark.LandingScreen"
         android:label="fragment_landing_screen"
-        tools:layout="@layout/fragment_landing_screen" />
+        tools:layout="@layout/fragment_landing_screen" >
+        <action
+            android:id="@+id/action_landingScreen_to_newDeck"
+            app:destination="@id/newDeck" />
+    </fragment>
+    <fragment
+        android:id="@+id/newDeck"
+        android:name="com.example.gamepark.NewDeck"
+        android:label="fragment_new_deck"
+        tools:layout="@layout/fragment_new_deck" />
 </navigation>
