@@ -10,9 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Gamepark">
         <activity
-            android:name=".CreateDeck"
-            android:exported="false" />
-        <activity
             android:name=".GameParkSplash"
             android:exported="true"
             android:theme="@style/GameParkSplash">

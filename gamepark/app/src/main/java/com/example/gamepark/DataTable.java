@@ -2,6 +2,7 @@ package com.example.gamepark;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
@@ -17,6 +18,8 @@ public class DataTable extends SQLiteOpenHelper {
             ,STAT2_COL,STAT3_COL,STAT4_COL,STAT5_COL,STAT6_COL,query;
 
 
+    SharedPreferences ver;
+    //public static final  String VER="myVerFile"
 
     public DataTable(@Nullable Context context,String deck_name,String stat1,String stat2,
                      String stat3,String stat4,String stat5,String stat6) {

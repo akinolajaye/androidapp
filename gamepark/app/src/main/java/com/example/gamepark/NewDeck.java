@@ -1,13 +1,10 @@
 package com.example.gamepark;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,29 +15,16 @@ import android.widget.Toast;
 
 
 public class NewDeck extends Fragment {
-
     String name_of_deck,stat1_val,stat2_val,stat3_val,stat4_val,stat5_val,stat6_val;
     EditText deck_name,stat1,stat2,stat3,stat4,stat5,stat6;
     Button submit_btn;
-    Context cxt;
-
-    public NewDeck() {
-        // Required empty public constructor
-    }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         // Inflate the layout for this fragment
-
-
-
         return inflater.inflate(R.layout.fragment_new_deck, container, false);
     }
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -66,19 +50,32 @@ public class NewDeck extends Fragment {
                 stat5_val=stat5.getText().toString();
                 stat6_val=stat6.getText().toString();
 
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(), "hello", Toast.LENGTH_SHORT).show();
 
-                DataTable myDB= new DataTable(getActivity().getApplicationContext(),name_of_deck,stat1_val,stat2_val,
+
+                    }
+                });
+
+
+
+
+
+
+
+
+
+               /* DataTable myDB= new DataTable(CreateDeck.this,name_of_deck,stat1_val,stat2_val,
                         stat3_val,stat4_val,stat5_val,stat6_val);
 
-                myDB.add();
+                myDB.add();*/
 
 
             }
 
         });
 
-
     }
-
-
 }

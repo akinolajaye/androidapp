@@ -36,17 +36,14 @@ public class LandingScreen extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
+        NavController navController=Navigation.findNavController(view);
 
         Button start=view.findViewById(R.id.new_deck_btn);
         start.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(),CreateDeck.class);
-                startActivity(intent);
 
-
-
+                navController.navigate((R.id.action_landingScreen_to_newDeck));
 
             }
         });
