@@ -1,5 +1,6 @@
 package com.example.gamepark;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class NewDeck extends Fragment {
@@ -20,6 +22,7 @@ public class NewDeck extends Fragment {
     String name_of_deck,stat1_val,stat2_val,stat3_val,stat4_val,stat5_val,stat6_val;
     EditText deck_name,stat1,stat2,stat3,stat4,stat5,stat6;
     Button submit_btn;
+    Context cxt;
 
     public NewDeck() {
         // Required empty public constructor
@@ -32,6 +35,8 @@ public class NewDeck extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
+
+
 
         return inflater.inflate(R.layout.fragment_new_deck, container, false);
     }
@@ -60,7 +65,16 @@ public class NewDeck extends Fragment {
                 stat4_val=stat4.getText().toString();
                 stat5_val=stat5.getText().toString();
                 stat6_val=stat6.getText().toString();
+
+
+                DataTable myDB= new DataTable(getActivity().getApplicationContext(),name_of_deck,stat1_val,stat2_val,
+                        stat3_val,stat4_val,stat5_val,stat6_val);
+
+                myDB.add();
+
+
             }
+
         });
 
 

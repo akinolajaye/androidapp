@@ -1,5 +1,6 @@
 package com.example.gamepark;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 public class LandingScreen extends Fragment {
@@ -34,14 +36,17 @@ public class LandingScreen extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        NavController navController= Navigation.findNavController(view);
+
 
         Button start=view.findViewById(R.id.new_deck_btn);
         start.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(getContext(),CreateDeck.class);
+                startActivity(intent);
 
-                navController.navigate((R.id.action_landingScreen_to_newDeck));
+
+
 
             }
         });

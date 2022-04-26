@@ -10,17 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Gamepark">
         <activity
+            android:name=".CreateDeck"
+            android:exported="false" />
+        <activity
             android:name=".GameParkSplash"
-            android:theme="@style/GameParkSplash"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/GameParkSplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
-
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
