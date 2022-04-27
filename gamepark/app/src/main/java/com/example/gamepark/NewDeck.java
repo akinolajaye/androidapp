@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,14 +52,26 @@ public class NewDeck extends Fragment {
                 stat5_val=stat5.getText().toString();
                 stat6_val=stat6.getText().toString();
 
-                getActivity().runOnUiThread(new Runnable() {
+
+
+               DBHandler myDB= new DBHandler(getContext());
+
+
+                /*getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getActivity(), "hello", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(),"hello", Toast.LENGTH_SHORT).show();
 
 
                     }
-                });
+                });*/
+
+                /*myDB.newDeck(name_of_deck,stat1_val,stat2_val,
+                        stat3_val,stat4_val,stat5_val,stat6_val);*/
+
+
+                NavController navController= Navigation.findNavController(view);
+                navController.navigate((R.id.action_newDeck_to_createCard));
 
 
 
@@ -67,10 +81,7 @@ public class NewDeck extends Fragment {
 
 
 
-               /* DataTable myDB= new DataTable(CreateDeck.this,name_of_deck,stat1_val,stat2_val,
-                        stat3_val,stat4_val,stat5_val,stat6_val);
 
-                myDB.add();*/
 
 
             }

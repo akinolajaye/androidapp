@@ -10,7 +10,7 @@
         android:id="@+id/deck_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="68dp"
         android:ems="10"
         android:hint="Deck Name"
         android:inputType="textPersonName"
@@ -94,7 +94,7 @@
         android:id="@+id/stat_6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="48dp"
         android:ems="10"
         android:hint="Stat #6"
         android:inputType="textPersonName"
@@ -113,10 +113,10 @@
         android:text="@string/submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/stat_6"
-        app:layout_constraintVertical_bias="0.16" />
+        app:layout_constraintVertical_bias="0.235" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

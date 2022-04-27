@@ -26,5 +26,14 @@
         android:id="@+id/newDeck"
         android:name="com.example.gamepark.NewDeck"
         android:label="fragment_new_deck"
-        tools:layout="@layout/fragment_new_deck" />
+        tools:layout="@layout/fragment_new_deck" >
+        <action
+            android:id="@+id/action_newDeck_to_createCard"
+            app:destination="@id/createCard" />
+    </fragment>
+    <fragment
+        android:id="@+id/createCard"
+        android:name="com.example.gamepark.CreateCard"
+        android:label="fragment_create_card"
+        tools:layout="@layout/fragment_create_card" />
 </navigation>
