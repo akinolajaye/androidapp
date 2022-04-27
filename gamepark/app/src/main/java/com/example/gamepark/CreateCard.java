@@ -1,24 +1,36 @@
 package com.example.gamepark;
 
+import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import androidx.activity.result.ActivityResultLauncher;
 import java.util.ArrayList;
 
 
 public class CreateCard extends Fragment {
+    ActivityResultLauncher<String> char_pic;
+    private ArrayList<TextView> card_lbl= new ArrayList<>();
+    private ArrayList<EditText> card_stats= new ArrayList<>();
+    private  String char_icon;
+
+
 
 
     public CreateCard() {
@@ -30,6 +42,7 @@ public class CreateCard extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_create_card, container, false);
 
 
@@ -41,9 +54,6 @@ public class CreateCard extends Fragment {
 
 
 
-        ArrayList<TextView> card_lbl= new ArrayList<>();
-
-
         card_lbl.add((TextView) view.findViewById(R.id.char_img_lbl));
         card_lbl.add((TextView) view.findViewById(R.id.char_name_lbl));
         card_lbl.add((TextView) view.findViewById(R.id.stat1_lbl));
@@ -53,10 +63,7 @@ public class CreateCard extends Fragment {
         card_lbl.add((TextView) view.findViewById(R.id.stat5_lbl));
         card_lbl.add((TextView) view.findViewById(R.id.stat6_lbl));
         TextView deck_lbl=(TextView) view.findViewById(R.id.deck_name_lbl);
-        deck_lbl.setText("Anime");
 
-
-        ArrayList<EditText> card_stats= new ArrayList<>();
         card_stats.add((EditText) view.findViewById(R.id.char_name));
         card_stats.add((EditText) view.findViewById(R.id.stat1));
         card_stats.add((EditText) view.findViewById(R.id.stat2));
@@ -69,13 +76,39 @@ public class CreateCard extends Fragment {
 
         DBHandler myDB = new DBHandler (getContext());
         Cursor cursor = myDB.getDeckStats();
-
         cursor.moveToNext();
 
+
+        deck_lbl.setText("Anime");
         for(int i=0;i<card_lbl.size();i++){
             card_lbl.get(i).setText(cursor.getString(1));
             cursor.moveToNext();
         }
+
+        char_pic=registerForActivityResult(
+                new ActivityResultContracts.GetContent(),
+                new ActivityResultCallback<Uri>() {
+                    @Override
+                    public void onActivityResult(Uri result) {
+                        ImageView img=(ImageView) view.findViewById(R.id.char_img);
+                        img.setImageURI(result);
+                        char_icon=result.toString();
+
+
+
+                    }
+                }
+        );
+
+        Button get_image= (Button) view.findViewById(R.id.upload);
+        get_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                char_pic.launch("image/*");
+
+
+            }
+        });
 
         Button addCard = (Button) view.findViewById(R.id.add_char);
         addCard.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +119,7 @@ public class CreateCard extends Fragment {
 
 
                 myDB.addCardToDeck(deck_lbl.getText().toString(),
+                        card_lbl.get(0).getText().toString(),char_icon,
                         card_lbl.get(1).getText().toString(),card_stats.get(0).getText().toString(),
                         card_lbl.get(2).getText().toString(),card_stats.get(1).getText().toString(),
                         card_lbl.get(3).getText().toString(),card_stats.get(2).getText().toString(),
