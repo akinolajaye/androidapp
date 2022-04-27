@@ -66,8 +66,8 @@ public class NewDeck extends Fragment {
                     }
                 });*/
 
-                /*myDB.newDeck(name_of_deck,stat1_val,stat2_val,
-                        stat3_val,stat4_val,stat5_val,stat6_val);*/
+                myDB.newDeck(name_of_deck,stat1_val,stat2_val,
+                        stat3_val,stat4_val,stat5_val,stat6_val);
 
 
                 NavController navController= Navigation.findNavController(view);

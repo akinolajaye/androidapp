@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 public class DBHandler extends SQLiteOpenHelper {
 
     private static final String DB_NAME="decks.db";
-    private static final int DB_VERSION=2;
+    private static final int DB_VERSION=1;
 
     public String x=DB_NAME;
 
@@ -67,6 +67,34 @@ public class DBHandler extends SQLiteOpenHelper {
             cursor.moveToFirst();
         }
         return cursor;
+
+    }
+
+    public void addCardToDeck(String TABLE_NAME,
+                              String CHAR_NAME_COL,String char_name,
+                              String STAT1_COL,String stat1,
+                              String STAT2_COL,String stat2,
+                              String STAT3_COL,String stat3,
+                              String STAT4_COL,String stat4,
+                              String STAT5_COL,String stat5,
+                              String STAT6_COL,String stat6
+                              ){
+
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues card = new ContentValues();
+
+        card.put(CHAR_NAME_COL,char_name);
+        card.put(STAT1_COL,stat1);
+        card.put(STAT2_COL,stat2);
+        card.put(STAT3_COL,stat3);
+        card.put(STAT4_COL,stat4);
+        card.put(STAT5_COL,stat5);
+        card.put(STAT6_COL,stat6);
+
+        db.insert(TABLE_NAME,null,card);
+        db.close();
+
+
 
     }
 }
