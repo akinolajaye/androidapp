@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 
 public class CreateCard extends Fragment {
 
@@ -34,11 +36,37 @@ public class CreateCard extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        DBHandler myDB = new DBHandler (getContext());
 
+
+        ArrayList<TextView> card_lbl= new ArrayList<>();
+
+        card_lbl.add((TextView) view.findViewById(R.id.char_img_lbl));
+        card_lbl.add((TextView) view.findViewById(R.id.char_name_lbl));
+        card_lbl.add((TextView) view.findViewById(R.id.stat1_lbl));
+        card_lbl.add((TextView) view.findViewById(R.id.stat2_lbl));
+        card_lbl.add((TextView) view.findViewById(R.id.stat3_lbl));
+        card_lbl.add((TextView) view.findViewById(R.id.stat4_lbl));
+        card_lbl.add((TextView) view.findViewById(R.id.stat5_lbl));
+        card_lbl.add((TextView) view.findViewById(R.id.stat6_lbl));
+
+        TextView deck_lbl=(TextView) view.findViewById(R.id.deck_name_lbl);
+        //deck_lbl.setText("Anime");
+
+        DBHandler myDB = new DBHandler (getContext());
         Cursor cursor = myDB.getDeckStats();
-        TextView test = (TextView) view.findViewById(R.id.char_img_lbl);
-        test.setText(cursor.getString(1));
+
+        cursor.moveToNext();
+
+        for(int i=0;i<card_lbl.size();i++){
+
+
+            card_lbl.get(i).setText(cursor.getString(1));
+            cursor.moveToNext();
+        }
+
+
+
+
 
     }
 }
