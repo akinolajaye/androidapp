@@ -1,7 +1,12 @@
 package com.example.gamepark;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -9,6 +14,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
@@ -17,10 +23,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -51,6 +65,8 @@ public class CreateCard extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
 
 
 
@@ -112,13 +128,20 @@ public class CreateCard extends Fragment {
 
         Button addCard = (Button) view.findViewById(R.id.add_char);
         addCard.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View view) {
 
+
+
+
+
+
+
                 DBHandler myDB = new DBHandler (getContext());
 
-
-                myDB.addCardToDeck(deck_lbl.getText().toString(),
+                /*myDB.addCardToDeck(deck_lbl.getText().toString(),
                         card_lbl.get(0).getText().toString(),char_icon,
                         card_lbl.get(1).getText().toString(),card_stats.get(0).getText().toString(),
                         card_lbl.get(2).getText().toString(),card_stats.get(1).getText().toString(),
@@ -127,17 +150,22 @@ public class CreateCard extends Fragment {
                         card_lbl.get(5).getText().toString(),card_stats.get(4).getText().toString(),
                         card_lbl.get(6).getText().toString(),card_stats.get(5).getText().toString(),
                         card_lbl.get(7).getText().toString(),card_stats.get(6).getText().toString()
-                        );
+                        );*/
 
-
-
+                NavController navController= Navigation.findNavController(view);
+                navController.navigate((R.id.action_createCard_to_viewCard));
             }
 
         });
 
-
-
-
-
     }
+
+
+
+
+
+
+
+
+
 }

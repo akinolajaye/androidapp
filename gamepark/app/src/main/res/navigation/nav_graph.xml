@@ -35,5 +35,14 @@
         android:id="@+id/createCard"
         android:name="com.example.gamepark.CreateCard"
         android:label="fragment_create_card"
-        tools:layout="@layout/fragment_create_card" />
+        tools:layout="@layout/fragment_create_card" >
+        <action
+            android:id="@+id/action_createCard_to_viewCard"
+            app:destination="@id/viewCard" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewCard"
+        android:name="com.example.gamepark.ViewCard"
+        android:label="fragment_view_card"
+        tools:layout="@layout/fragment_view_card" />
 </navigation>
