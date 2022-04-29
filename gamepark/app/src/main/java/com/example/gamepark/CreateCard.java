@@ -45,8 +45,6 @@ public class CreateCard extends Fragment {
     private  String char_icon;
 
 
-
-
     public CreateCard() {
         // Required empty public constructor
     }
@@ -67,9 +65,6 @@ public class CreateCard extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-
-
-
         card_lbl.add((TextView) view.findViewById(R.id.char_img_lbl));
         card_lbl.add((TextView) view.findViewById(R.id.char_name_lbl));
         card_lbl.add((TextView) view.findViewById(R.id.stat1_lbl));
@@ -88,12 +83,9 @@ public class CreateCard extends Fragment {
         card_stats.add((EditText) view.findViewById(R.id.stat5));
         card_stats.add((EditText) view.findViewById(R.id.stat6));
 
-
-
         DBHandler myDB = new DBHandler (getContext());
         Cursor cursor = myDB.getDeckStats();
         cursor.moveToNext();
-
 
         deck_lbl.setText("Anime");
         for(int i=0;i<card_lbl.size();i++){
@@ -129,28 +121,28 @@ public class CreateCard extends Fragment {
         Button addCard = (Button) view.findViewById(R.id.add_char);
         addCard.setOnClickListener(new View.OnClickListener() {
 
-
             @Override
             public void onClick(View view) {
 
+                Bundle bundle = new Bundle();
+
+                bundle.putString("char_icon",char_icon);
+                bundle.putString("char_name",card_stats.get(0).getText().toString());
+                bundle.putString("stat1_lbl",card_lbl.get(2).getText().toString());
+                bundle.putString("stat1",card_stats.get(1).getText().toString());
+                bundle.putString("stat2_lbl",card_lbl.get(3).getText().toString());
+                bundle.putString("stat2",card_stats.get(2).getText().toString());
+                bundle.putString("stat3_lbl",card_lbl.get(4).getText().toString());
+                bundle.putString("stat3",card_stats.get(3).getText().toString());
+                bundle.putString("stat4_lbl",card_lbl.get(5).getText().toString());
+                bundle.putString("stat4",card_stats.get(4).getText().toString());
+                bundle.putString("stat5_lbl",card_lbl.get(6).getText().toString());
+                bundle.putString("stat5",card_stats.get(5).getText().toString());
+                bundle.putString("stat6_lbl",card_lbl.get(7).getText().toString());
+                bundle.putString("stat6",card_stats.get(6).getText().toString());
 
 
-
-
-
-
-                DBHandler myDB = new DBHandler (getContext());
-
-                /*myDB.addCardToDeck(deck_lbl.getText().toString(),
-                        card_lbl.get(0).getText().toString(),char_icon,
-                        card_lbl.get(1).getText().toString(),card_stats.get(0).getText().toString(),
-                        card_lbl.get(2).getText().toString(),card_stats.get(1).getText().toString(),
-                        card_lbl.get(3).getText().toString(),card_stats.get(2).getText().toString(),
-                        card_lbl.get(4).getText().toString(),card_stats.get(3).getText().toString(),
-                        card_lbl.get(5).getText().toString(),card_stats.get(4).getText().toString(),
-                        card_lbl.get(6).getText().toString(),card_stats.get(5).getText().toString(),
-                        card_lbl.get(7).getText().toString(),card_stats.get(6).getText().toString()
-                        );*/
+                getParentFragmentManager().setFragmentResult("card_info",bundle);
 
                 NavController navController= Navigation.findNavController(view);
                 navController.navigate((R.id.action_createCard_to_viewCard));

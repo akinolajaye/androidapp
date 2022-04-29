@@ -41,7 +41,7 @@ public class DBHandler extends SQLiteOpenHelper {
         String query =
                 "CREATE TABLE " + deck_name +
                         " (" + "charid" + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        char_img + " TEXT, " +
+                        char_img + " BLOB, " +
                         character + " TEXT, " +
                         stat1 + " TEXT, " +
                         stat2 + " TEXT, " +
@@ -70,8 +70,20 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
 
+    public Cursor getCardTest (){
+        SQLiteDatabase db =this.getReadableDatabase();
+        Cursor cursor =db.rawQuery("SELECT char_img FROM Anime ",null );
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        return cursor;
+
+    }
+
+
     public void addCardToDeck(String TABLE_NAME,
-                              String CHAR_IMG_COL,String char_img,
+                              String CHAR_IMG_COL,byte[] char_img,
                               String CHAR_NAME_COL,String char_name,
                               String STAT1_COL,String stat1,
                               String STAT2_COL,String stat2,

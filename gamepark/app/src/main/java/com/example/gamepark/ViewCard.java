@@ -1,15 +1,19 @@
 package com.example.gamepark;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 
 import android.os.Environment;
 import android.view.LayoutInflater;
@@ -21,6 +25,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextClock;
 import android.widget.TextView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -28,8 +33,17 @@ import java.util.Random;
 
 public class ViewCard extends Fragment {
 
+    private String frag_char_name
+            ,frag_stat1_lbl,frag_stat1
+            ,frag_stat2_lbl,frag_stat2
+            ,frag_stat3_lbl,frag_stat3
+            ,frag_stat4_lbl,frag_stat4
+            ,frag_stat5_lbl,frag_stat5
+            ,frag_stat6_lbl,frag_stat6
+            ,frag_char_img
 
-
+            ;
+    private byte[] char_icon;
     public ViewCard() {
         // Required empty public constructor
     }
@@ -40,6 +54,27 @@ public class ViewCard extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+        getParentFragmentManager().setFragmentResultListener("card_info", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                frag_char_img=result.getString("char_icon");
+                frag_char_name=result.getString("char_name");
+                frag_stat1_lbl=result.getString("stat1_lbl");
+                frag_stat1=result.getString("stat1");
+                frag_stat2_lbl=result.getString("stat2_lbl");
+                frag_stat2=result.getString("stat2");
+                frag_stat3_lbl=result.getString("stat3_lbl");
+                frag_stat3=result.getString("stat3");
+                frag_stat4_lbl=result.getString("stat4_lbl");
+                frag_stat4=result.getString("stat4");
+                frag_stat5_lbl=result.getString("stat5_lbl");
+                frag_stat5=result.getString("stat5");
+                frag_stat6_lbl=result.getString("stat6_lbl");
+                frag_stat6=result.getString("stat6");
+            }
+        });
+
         return inflater.inflate(R.layout.fragment_view_card, container, false);
     }
 
@@ -47,7 +82,9 @@ public class ViewCard extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Button button= (Button) view.findViewById(R.id.click);
+        Button view_button= (Button) view.findViewById(R.id.click);
+        Button add_button=(Button) view.findViewById(R.id.add_card);
+
         final RelativeLayout relativeLayout= view.findViewById(R.id.rlayout);
         ImageView imageView=view.findViewById(R.id.img);
         TextView card_name=(TextView) view.findViewById(R.id.character_name);
@@ -63,47 +100,71 @@ public class ViewCard extends Fragment {
         TextView stat5=(TextView) view.findViewById(R.id.card_stat5);
         TextView stat6_lbl=(TextView) view.findViewById(R.id.card_stat6_lbl);
         TextView stat6=(TextView) view.findViewById(R.id.card_stat6);
-
-        int img_res = getResources().getIdentifier("@drawable/sas",null, getContext().getPackageName());
         ImageView card_img = (ImageView) view.findViewById(R.id.card_icon);
-        Drawable res=getResources().getDrawable(img_res);
+        ImageView card=(ImageView) view.findViewById(R.id.card);
 
-        button.setOnClickListener(new View.OnClickListener() {
+
+
+        view_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                card_img.setImageDrawable(res);
-
-
-                card_name.setText("Sasuke");
-                stat1_lbl.setText("Chakra");
-                stat1.setText("85");
-                stat2_lbl.setText("Speed");
-                stat2.setText("99");
-                stat3_lbl.setText("Intellect");
-                stat3.setText("99");
-                stat4_lbl.setText("Plot");
-                stat4.setText("95");
-                stat5_lbl.setText("Skill");
-                stat5.setText("100");
-                stat6_lbl.setText("Strength");
-                stat6.setText("80");
-
-
-                Bitmap bitmap= Bitmap.createBitmap(relativeLayout.getWidth(),relativeLayout.getHeight(), Bitmap.Config.ARGB_8888);
-                Canvas canvas = new Canvas(bitmap);
-                relativeLayout.draw(canvas);
-                //imageView.setImageBitmap(bitmap);
-                SaveImage(bitmap);
-
+                card_img.setImageURI(Uri.parse(frag_char_img));
+                card_name.setText(frag_char_name);
+                stat1_lbl.setText(frag_stat1_lbl);
+                stat1.setText(frag_stat1);
+                stat2_lbl.setText(frag_stat2_lbl);
+                stat2.setText(frag_stat2);
+                stat3_lbl.setText(frag_stat3_lbl);
+                stat3.setText(frag_stat3);
+                stat4_lbl.setText(frag_stat4_lbl);
+                stat4.setText(frag_stat4);
+                stat5_lbl.setText(frag_stat5_lbl);
+                stat5.setText(frag_stat5);
+                stat6_lbl.setText(frag_stat6_lbl);
+                stat6.setText(frag_stat6);
 
 
             }
         });
 
+        add_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Bitmap bitmap= Bitmap.createBitmap(relativeLayout.getWidth(),relativeLayout.getHeight(), Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bitmap);
+                relativeLayout.draw(canvas);
+                char_icon=getBytes(bitmap);
+                SaveImage(bitmap);
+
+                DBHandler myDB = new DBHandler (getContext());
+
+                /*myDB.addCardToDeck("Anime",
+                        "char_img",char_icon,
+                        "character",frag_char_name,
+                        frag_stat1_lbl,frag_stat1,
+                        frag_stat2_lbl,frag_stat2,
+                        frag_stat3_lbl,frag_stat3,
+                        frag_stat4_lbl,frag_stat4,
+                        frag_stat5_lbl,frag_stat5,
+                        frag_stat6_lbl,frag_stat6
+                        );*/
+            }
+        });
 
 
+    }
 
+    // convert from bitmap to byte array
+    public static byte[] getBytes(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,  0, stream);
+        return stream.toByteArray();
+    }
+
+    // convert from byte array to bitmap
+    public static Bitmap getImage(byte[] image) {
+        return BitmapFactory.decodeByteArray(image, 0, image.length);
     }
 
 
