@@ -14,7 +14,6 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String DB_NAME="decks.db";
     private static final int DB_VERSION=1;
 
-    public String x=DB_NAME;
 
     public DBHandler(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -31,6 +30,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
 
+        //gonna have to make one big deck with deck name as a column select by deck name
 
 
     public void newDeck(String deck_name,String stat1,String stat2,
@@ -39,16 +39,16 @@ public class DBHandler extends SQLiteOpenHelper {
         String char_img="char_img";
         String character="character";
         String query =
-                "CREATE TABLE " + deck_name +
+                "CREATE TABLE " + "`"+deck_name+"`" +
                         " (" + "charid" + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         char_img + " BLOB, " +
-                        character + " TEXT, " +
-                        stat1 + " TEXT, " +
-                        stat2 + " TEXT, " +
-                        stat3 + " TEXT, " +
-                        stat4 + " TEXT, " +
-                        stat5 + " TEXT, " +
-                        stat6 + " TEXT)";
+                        "`"+character+"`" + " TEXT, " +
+                        "`"+stat1+"`" + " TEXT, " +
+                        "`"+stat2+"`" + " TEXT, " +
+                        "`"+stat3+"`" + " TEXT, " +
+                        "`"+stat4+"`" + " TEXT, " +
+                        "`"+stat5+"`" + " TEXT, " +
+                        "`"+stat6+"`" + " TEXT)";
 
         final SQLiteDatabase db=this.getWritableDatabase();
         db.execSQL(query);
@@ -58,10 +58,18 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
 
+    private String getDeckStatsSQL(String table){
 
-    public Cursor getDeckStats(){
+        String sql ="PRAGMA table_info( `"+table+"` )";
+
+        return sql;
+
+    }
+
+    public Cursor getDeckStats(String table){
         SQLiteDatabase db =this.getReadableDatabase();
-        Cursor cursor =db.rawQuery("PRAGMA table_info( Anime )",null );
+
+        Cursor cursor =db.rawQuery(getDeckStatsSQL(table),null );
 
         if (cursor != null) {
             cursor.moveToFirst();
@@ -70,9 +78,14 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
 
-    public Cursor getCardTest (){
+    private String getCardTestSQL(String table){
+        String sql = "SELECT char_img FROM "+table+" ";
+        return sql;
+
+    }
+    public Cursor getCardTest (String table){
         SQLiteDatabase db =this.getReadableDatabase();
-        Cursor cursor =db.rawQuery("SELECT char_img FROM Anime ",null );
+        Cursor cursor =db.rawQuery(getCardTestSQL(table),null );
 
         if (cursor != null) {
             cursor.moveToFirst();
@@ -97,15 +110,15 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues card = new ContentValues();
 
         card.put(CHAR_IMG_COL,char_img);
-        card.put(CHAR_NAME_COL,char_name);
-        card.put(STAT1_COL,stat1);
-        card.put(STAT2_COL,stat2);
-        card.put(STAT3_COL,stat3);
-        card.put(STAT4_COL,stat4);
-        card.put(STAT5_COL,stat5);
-        card.put(STAT6_COL,stat6);
+        card.put("`"+CHAR_NAME_COL+"`","`"+char_name+"`");
+        card.put("`"+STAT1_COL+"`","`"+stat1+"`");
+        card.put("`"+STAT2_COL+"`","`"+stat2+"`");
+        card.put("`"+STAT3_COL+"`","`"+stat3+"`");
+        card.put("`"+STAT4_COL+"`","`"+stat4+"`");
+        card.put("`"+STAT5_COL+"`","`"+stat5+"`");
+        card.put("`"+STAT6_COL+"`","`"+stat6+"`");
 
-        db.insert(TABLE_NAME,null,card);
+        db.insert("`"+TABLE_NAME+"`",null,card);
         db.close();
 
 

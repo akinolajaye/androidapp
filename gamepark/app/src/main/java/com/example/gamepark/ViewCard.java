@@ -1,6 +1,7 @@
 package com.example.gamepark;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -33,7 +34,7 @@ import java.util.Random;
 
 public class ViewCard extends Fragment {
 
-    private String frag_char_name
+    private String frag_char_name    //stores the name of the recieved variables from the bundle
             ,frag_stat1_lbl,frag_stat1
             ,frag_stat2_lbl,frag_stat2
             ,frag_stat3_lbl,frag_stat3
@@ -58,7 +59,7 @@ public class ViewCard extends Fragment {
         getParentFragmentManager().setFragmentResultListener("card_info", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                frag_char_img=result.getString("char_icon");
+                frag_char_img=result.getString("char_icon");//gets all the values from the bundle
                 frag_char_name=result.getString("char_name");
                 frag_stat1_lbl=result.getString("stat1_lbl");
                 frag_stat1=result.getString("stat1");
@@ -84,9 +85,13 @@ public class ViewCard extends Fragment {
 
         Button view_button= (Button) view.findViewById(R.id.click);
         Button add_button=(Button) view.findViewById(R.id.add_card);
+        SharedPreferences sp=getContext().getApplicationContext().getSharedPreferences("user_pref", Context.MODE_PRIVATE);
+        String current_deck_name=sp.getString("deck_name","");
 
+
+        //gets all the xml text view objects that will store the stats
         final RelativeLayout relativeLayout= view.findViewById(R.id.rlayout);
-        ImageView imageView=view.findViewById(R.id.img);
+
         TextView card_name=(TextView) view.findViewById(R.id.character_name);
         TextView stat1_lbl=(TextView) view.findViewById(R.id.card_stat1_lbl);
         TextView stat1=(TextView) view.findViewById(R.id.card_stat1);
@@ -101,10 +106,11 @@ public class ViewCard extends Fragment {
         TextView stat6_lbl=(TextView) view.findViewById(R.id.card_stat6_lbl);
         TextView stat6=(TextView) view.findViewById(R.id.card_stat6);
         ImageView card_img = (ImageView) view.findViewById(R.id.card_icon);
-        ImageView card=(ImageView) view.findViewById(R.id.card);
 
 
 
+
+        //sets the text on the xml to the values from the bundle
         view_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -128,18 +134,19 @@ public class ViewCard extends Fragment {
         });
 
         add_button.setOnClickListener(new View.OnClickListener() {
+            //button to add card to database
             @Override
             public void onClick(View view) {
 
-                Bitmap bitmap= Bitmap.createBitmap(relativeLayout.getWidth(),relativeLayout.getHeight(), Bitmap.Config.ARGB_8888);
-                Canvas canvas = new Canvas(bitmap);
-                relativeLayout.draw(canvas);
-                char_icon=getBytes(bitmap);
-                SaveImage(bitmap);
+                Bitmap bitmap= Bitmap.createBitmap(relativeLayout.getWidth(),relativeLayout.getHeight(), Bitmap.Config.ARGB_8888);//create bitmap object
+                Canvas canvas = new Canvas(bitmap);//create canvas obejct using bitmap
+                relativeLayout.draw(canvas);//draw to relative layout to store the xml layout as an image
+                char_icon=getBytes(bitmap); //convert bitmap image to bytes in order to be stored
+                SaveImage(bitmap);//save image on phone
 
-                DBHandler myDB = new DBHandler (getContext());
+                DBHandler myDB = new DBHandler (getContext());//create db handler object
 
-                /*myDB.addCardToDeck("Anime",
+                myDB.addCardToDeck(current_deck_name, //add object to the card deck
                         "char_img",char_icon,
                         "character",frag_char_name,
                         frag_stat1_lbl,frag_stat1,
@@ -148,7 +155,7 @@ public class ViewCard extends Fragment {
                         frag_stat4_lbl,frag_stat4,
                         frag_stat5_lbl,frag_stat5,
                         frag_stat6_lbl,frag_stat6
-                        );*/
+                        );
             }
         });
 

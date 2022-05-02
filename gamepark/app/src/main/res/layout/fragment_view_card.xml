@@ -7,15 +7,20 @@
     tools:context=".ViewCard">
 
     <RelativeLayout
+        android:id="@+id/rlayout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/rlayout">
+        android:layout_height="wrap_content">
 
 
         <ImageView
             android:id="@+id/card"
-            android:layout_width="12.5in"
-            android:layout_height="5in"
+            android:layout_width="2.5in"
+            android:layout_height="3.5in"
+
+
+            android:adjustViewBounds="true"
+            android:cropToPadding="false"
+            android:scaleType="fitXY"
             android:src="@drawable/card_temp" />
 
         <ImageView
@@ -23,7 +28,7 @@
             android:layout_width="223dp"
             android:layout_height="146dp"
             android:layout_marginStart="100dp"
-            android:layout_marginTop="130dp"
+            android:layout_marginTop="55dp"
             android:layout_marginEnd="100dp"
             android:layout_marginBottom="100dp"
             tools:src="@tools:sample/avatars" />
@@ -32,10 +37,14 @@
             android:id="@+id/character_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="120dp"
-            android:layout_marginTop="327dp"
-            android:layout_marginBottom="100dp"
+
+
+            android:layout_alignTop="@+id/card_icon"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="118dp"
+            android:layout_marginTop="199dp"
             android:fontFamily="serif"
+            android:text="Sasuke"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="30sp" />
@@ -44,11 +53,14 @@
             android:id="@+id/card_stat1_lbl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="372dp"
+            android:layout_below="@+id/character_name"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="100dp"
             android:layout_marginBottom="100dp"
             android:fontFamily="serif"
+            android:text="Character"
             android:textColor="@color/white"
             android:textSize="30sp" />
 
@@ -56,10 +68,14 @@
             android:id="@+id/card_stat1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/character_name"
+            android:layout_alignParentEnd="true"
             android:layout_marginStart="280dp"
-            android:layout_marginTop="372dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="46dp"
             android:layout_marginBottom="100dp"
             android:fontFamily="serif"
+            android:text="1000"
             android:textColor="@color/white"
             android:textSize="30sp" />
 
@@ -74,6 +90,7 @@
             android:fontFamily="serif"
             android:textColor="@color/white"
             android:textSize="30sp" />
+
         <TextView
             android:id="@+id/card_stat2"
             android:layout_width="wrap_content"
@@ -85,6 +102,7 @@
             android:fontFamily="serif"
             android:textColor="@color/white"
             android:textSize="30sp" />
+
         <TextView
             android:id="@+id/card_stat3_lbl"
             android:layout_width="wrap_content"
@@ -184,6 +202,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginEnd="13dp"
         android:text="View Card"/>
 
@@ -194,12 +213,6 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="13dp"
         android:text="Add to Deck"/>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/img"
-        android:layout_below="@id/rlayout"/>
 
 
 </RelativeLayout>

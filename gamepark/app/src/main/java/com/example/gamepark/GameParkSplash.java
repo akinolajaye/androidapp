@@ -10,6 +10,6 @@ public class GameParkSplash extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivity(new Intent(this,MainActivity.class));
+        startActivity(new Intent(this,MainActivity.class));//calls the main activity after displaying splash screen
     }
 }

@@ -43,7 +43,7 @@ public class LandingScreen extends Fragment {
             @Override
             public void onClick(View view) {
 
-                navController.navigate((R.id.action_landingScreen_to_newDeck));
+                navController.navigate((R.id.action_landingScreen_to_newDeck)); //move to next page
 
             }
         });
