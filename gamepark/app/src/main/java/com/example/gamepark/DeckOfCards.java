@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -19,19 +20,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 
 
 public class DeckOfCards extends Fragment {
-    RecyclerView recyclerView;
 
-    DBHandler myDB;
 
-    ArrayList<Bitmap> card_img;
-    ArrayList<String> card_name;
-    SharedPreferences sp=getContext().getApplicationContext().getSharedPreferences("user_pref", Context.MODE_PRIVATE);
-    String current_deck_name=sp.getString("deck_name","");
 
+    private ArrayList<Bitmap> card_img=new ArrayList<>();
+    private ArrayList<String> card_name= new ArrayList<>();
 
     public DeckOfCards() {
         // Required empty public constructor
@@ -48,8 +47,9 @@ public class DeckOfCards extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        Button add_new_card_btn= (Button) view.findViewById(R.id.floatingActionButton);
+        CustomAdapter customAdapter;
+        RecyclerView recyclerView=(RecyclerView) view.findViewById(R.id.card_deck_view);
+        FloatingActionButton add_new_card_btn= (FloatingActionButton) view.findViewById(R.id.floatingActionButton);
         add_new_card_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,33 +58,32 @@ public class DeckOfCards extends Fragment {
             }
         });
 
-        myDB=new DBHandler(getContext());
-        card_img=new ArrayList<>();
-        card_name= new ArrayList<>();
+        DBHandler myDB=new DBHandler(getContext());
+
 
         displayData();
+        customAdapter=new CustomAdapter(getContext(),card_img,card_name);
+        recyclerView.setAdapter(customAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     public void displayData(){
+    SharedPreferences sp=getContext().getApplicationContext().getSharedPreferences("user_pref", Context.MODE_PRIVATE);
+    String current_deck_name=sp.getString("deck_name","");
+
+    DBHandler myDB=new DBHandler(getContext());
         Cursor cursor= myDB.getDeck(current_deck_name);
         if(cursor.getCount()==0){
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(getActivity(),"No data", Toast.LENGTH_SHORT).show();
-
-
-                }
-            });
 
 
         }else{
-            while (cursor.moveToNext()){
+            cursor.moveToFirst();
+            do {
 
                 card_img.add(myDB.getImage(cursor.getBlob(1)));
                 card_name.add(cursor.getString(2));
 
-            }
+            }while (cursor.moveToNext());
         }
     }
 }

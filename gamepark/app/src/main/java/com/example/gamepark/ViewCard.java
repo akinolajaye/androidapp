@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.os.Environment;
 import android.view.LayoutInflater;
@@ -157,6 +159,10 @@ public class ViewCard extends Fragment {
                         frag_stat5_lbl,frag_stat5,
                         frag_stat6_lbl,frag_stat6
                         );
+
+
+                NavController navController= Navigation.findNavController(view);
+                navController.navigate((R.id.action_viewCard_to_deckOfCards));//move to the next page
             }
         });
 

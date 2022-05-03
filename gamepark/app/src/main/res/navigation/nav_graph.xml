@@ -44,7 +44,11 @@
         android:id="@+id/viewCard"
         android:name="com.example.gamepark.ViewCard"
         android:label="fragment_view_card"
-        tools:layout="@layout/fragment_view_card" />
+        tools:layout="@layout/fragment_view_card" >
+        <action
+            android:id="@+id/action_viewCard_to_deckOfCards"
+            app:destination="@id/deckOfCards" />
+    </fragment>
     <fragment
         android:id="@+id/deckOfCards"
         android:name="com.example.gamepark.DeckOfCards"
