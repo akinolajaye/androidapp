@@ -87,7 +87,7 @@ public class ViewCard extends Fragment {
         Button add_button=(Button) view.findViewById(R.id.add_card);
         SharedPreferences sp=getContext().getApplicationContext().getSharedPreferences("user_pref", Context.MODE_PRIVATE);
         String current_deck_name=sp.getString("deck_name","");
-
+        add_button.setEnabled(false);
 
         //gets all the xml text view objects that will store the stats
         final RelativeLayout relativeLayout= view.findViewById(R.id.rlayout);
@@ -129,6 +129,7 @@ public class ViewCard extends Fragment {
                 stat6_lbl.setText(frag_stat6_lbl);
                 stat6.setText(frag_stat6);
 
+                add_button.setEnabled(true);
 
             }
         });
@@ -142,7 +143,7 @@ public class ViewCard extends Fragment {
                 Canvas canvas = new Canvas(bitmap);//create canvas obejct using bitmap
                 relativeLayout.draw(canvas);//draw to relative layout to store the xml layout as an image
                 char_icon=getBytes(bitmap); //convert bitmap image to bytes in order to be stored
-                SaveImage(bitmap);//save image on phone
+                //SaveImage(bitmap);//save image on phone
 
                 DBHandler myDB = new DBHandler (getContext());//create db handler object
 

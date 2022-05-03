@@ -110,13 +110,13 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues card = new ContentValues();
 
         card.put(CHAR_IMG_COL,char_img);
-        card.put("`"+CHAR_NAME_COL+"`","`"+char_name+"`");
-        card.put("`"+STAT1_COL+"`","`"+stat1+"`");
-        card.put("`"+STAT2_COL+"`","`"+stat2+"`");
-        card.put("`"+STAT3_COL+"`","`"+stat3+"`");
-        card.put("`"+STAT4_COL+"`","`"+stat4+"`");
-        card.put("`"+STAT5_COL+"`","`"+stat5+"`");
-        card.put("`"+STAT6_COL+"`","`"+stat6+"`");
+        card.put("`"+CHAR_NAME_COL+"`",char_name);
+        card.put("`"+STAT1_COL+"`",stat1);
+        card.put("`"+STAT2_COL+"`",stat2);
+        card.put("`"+STAT3_COL+"`",stat3);
+        card.put("`"+STAT4_COL+"`",stat4);
+        card.put("`"+STAT5_COL+"`",stat5);
+        card.put("`"+STAT6_COL+"`",stat6);
 
         db.insert("`"+TABLE_NAME+"`",null,card);
         db.close();
