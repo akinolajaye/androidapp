@@ -28,8 +28,8 @@
         android:label="fragment_new_deck"
         tools:layout="@layout/fragment_new_deck" >
         <action
-            android:id="@+id/action_newDeck_to_createCard"
-            app:destination="@id/createCard" />
+            android:id="@+id/action_newDeck_to_deckOfCards"
+            app:destination="@id/deckOfCards" />
     </fragment>
     <fragment
         android:id="@+id/createCard"
@@ -45,4 +45,13 @@
         android:name="com.example.gamepark.ViewCard"
         android:label="fragment_view_card"
         tools:layout="@layout/fragment_view_card" />
+    <fragment
+        android:id="@+id/deckOfCards"
+        android:name="com.example.gamepark.DeckOfCards"
+        android:label="fragment_deck_of_cards"
+        tools:layout="@layout/fragment_deck_of_cards" >
+        <action
+            android:id="@+id/action_deckOfCards_to_createCard"
+            app:destination="@id/createCard" />
+    </fragment>
 </navigation>

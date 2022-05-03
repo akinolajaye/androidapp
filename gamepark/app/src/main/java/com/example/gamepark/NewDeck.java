@@ -86,8 +86,9 @@ public class NewDeck extends Fragment {
                         stat3_val,stat4_val,stat5_val,stat6_val);
 
 
+
                 NavController navController= Navigation.findNavController(view);
-                navController.navigate((R.id.action_newDeck_to_createCard));
+                navController.navigate((R.id.action_newDeck_to_deckOfCards));
 
 
 

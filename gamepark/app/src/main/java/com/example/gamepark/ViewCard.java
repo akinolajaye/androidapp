@@ -170,10 +170,7 @@ public class ViewCard extends Fragment {
         return stream.toByteArray();
     }
 
-    // convert from byte array to bitmap
-    public static Bitmap getImage(byte[] image) {
-        return BitmapFactory.decodeByteArray(image, 0, image.length);
-    }
+
 
 
     private void SaveImage(Bitmap finalBitmap) {

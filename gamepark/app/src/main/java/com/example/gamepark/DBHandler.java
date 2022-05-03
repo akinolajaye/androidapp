@@ -6,6 +6,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import androidx.annotation.Nullable;
 
@@ -94,6 +96,23 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
 
+    private String getDeckSQL(String table){
+        String sql = "SELECT * FROM "+table+" ";
+        return sql;
+
+    }
+
+    public Cursor getDeck (String table){
+        SQLiteDatabase db =this.getReadableDatabase();
+        Cursor cursor =db.rawQuery(getDeckSQL(table),null );
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        return cursor;
+
+    }
+
 
     public void addCardToDeck(String TABLE_NAME,
                               String CHAR_IMG_COL,byte[] char_img,
@@ -122,6 +141,11 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
 
 
+    }
 
+
+    // convert from byte array to bitmap
+    public  Bitmap getImage(byte[] image) {
+        return BitmapFactory.decodeByteArray(image, 0, image.length);
     }
 }
