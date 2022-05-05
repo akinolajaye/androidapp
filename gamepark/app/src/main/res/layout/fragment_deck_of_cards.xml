@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DeckOfCards">
+    tools:context=".DeckOfCards"
+    android:background="@color/darkred">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/card_deck_view"
-        android:paddingTop="?attr/actionBarSize"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

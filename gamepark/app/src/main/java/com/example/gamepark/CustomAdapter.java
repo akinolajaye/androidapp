@@ -16,12 +16,12 @@ import java.util.ArrayList;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
     private Context context;
-    private ArrayList card_img, card_name;
-    CustomAdapter(Context context,ArrayList card_img,ArrayList card_name){
+    private ArrayList card_img;
+    CustomAdapter(Context context,ArrayList card_img){
 
         this.context=context;
         this.card_img=card_img;
-        this.card_name=card_name;
+
 
 
     }
@@ -36,13 +36,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.card_img_deck.setImageBitmap((Bitmap) card_img.get(position));
-        holder.card_name_deck.setText(card_name.get(position).toString());
+        //holder.card_name_deck.setText(card_name.get(position).toString());
 
     }
 
     @Override
     public int getItemCount() {
-        return card_name.size();
+        return card_img.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -52,7 +52,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            card_name_deck=itemView.findViewById(R.id.card_deck_char_name);
+            //card_name_deck=itemView.findViewById(R.id.card_deck_char_name);
             card_img_deck=itemView.findViewById(R.id.card_img_deck);
         }
     }

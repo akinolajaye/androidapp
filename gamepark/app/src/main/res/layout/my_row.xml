@@ -1,39 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="0.83in"
+    android:layout_height="1.16in"
+
+
+
+    >
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="match_parent"
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        >
+
+        <ImageView
+
+            android:id="@+id/card_img_deck"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="12dp">
-
-            <ImageView
-                android:id="@+id/card_img_deck"
-                android:layout_width="0.83in"
-                android:layout_height="1.16in"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
-
-            <TextView
-                android:id="@+id/card_deck_char_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="72dp"
-                android:layout_marginTop="52dp"
-                android:text="TextView"
-                android:textSize="24sp"
-                app:layout_constraintStart_toEndOf="@+id/card_img_deck"
-                app:layout_constraintTop_toTopOf="@+id/card_img_deck" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            android:adjustViewBounds="true"
+            android:cropToPadding="false"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
 
 
     </androidx.cardview.widget.CardView>
@@ -41,4 +34,4 @@
 
 
 
-</LinearLayout>
+</RelativeLayout>

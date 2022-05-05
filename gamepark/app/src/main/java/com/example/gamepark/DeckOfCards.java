@@ -11,9 +11,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +32,7 @@ public class DeckOfCards extends Fragment {
 
 
     private ArrayList<Bitmap> card_img=new ArrayList<>();
-    private ArrayList<String> card_name= new ArrayList<>();
+
 
     public DeckOfCards() {
         // Required empty public constructor
@@ -62,9 +64,11 @@ public class DeckOfCards extends Fragment {
 
 
         displayData();
-        customAdapter=new CustomAdapter(getContext(),card_img,card_name);
+        customAdapter=new CustomAdapter(getContext(),card_img);
         recyclerView.setAdapter(customAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(3, 20, true, 0));
+
     }
 
     public void displayData(){
@@ -81,7 +85,7 @@ public class DeckOfCards extends Fragment {
             do {
 
                 card_img.add(myDB.getImage(cursor.getBlob(1)));
-                card_name.add(cursor.getString(2));
+
 
             }while (cursor.moveToNext());
         }
