@@ -18,11 +18,11 @@
             android:id="@+id/player1"
             android:layout_width="0.83in"
             android:layout_height="1.16in"
+            android:layout_marginStart="32dp"
+            android:layout_marginBottom="208dp"
             android:adjustViewBounds="true"
             android:cropToPadding="false"
             android:scaleType="fitXY"
-            android:layout_marginStart="24dp"
-            android:layout_marginBottom="236dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:src="@tools:sample/avatars" />

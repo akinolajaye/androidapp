@@ -26,6 +26,15 @@ import java.util.ArrayList;
 public class Battlefront extends Fragment {
 
     private ArrayList<Bitmap> card_img=new ArrayList<>();
+    private ArrayList<String> card_stat1=new ArrayList<>();
+    private ArrayList<String> card_stat2=new ArrayList<>();
+    private ArrayList<String> card_stat3=new ArrayList<>();
+    private ArrayList<String> card_stat4=new ArrayList<>();
+    private ArrayList<String> card_stat5=new ArrayList<>();
+    private ArrayList<String> card_stat6=new ArrayList<>();
+    Player jaye=new Player("jaye");
+
+
 
     public Battlefront() {
         // Required empty public constructor
@@ -47,15 +56,20 @@ public class Battlefront extends Fragment {
 
         BattleAdapter battleAdapter;
         RecyclerView recyclerView=(RecyclerView) view.findViewById(R.id.battlefront_deck_view);
-        displayData();
-        battleAdapter=new BattleAdapter(getContext(),card_img,p1);
+
+        addAllCardsToDeck();
+
+        battleAdapter=new BattleAdapter(getContext(), jaye.Deck,
+                p1);
+
+
         recyclerView.setAdapter(battleAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(3, 20, true, 0));
 
     }
 
-    public void displayData(){
+    public void addAllCardsToDeck(){
         SharedPreferences sp=getContext().getApplicationContext().getSharedPreferences("user_pref", Context.MODE_PRIVATE);
         String current_deck_name=sp.getString("deck_name","");
 
@@ -67,8 +81,24 @@ public class Battlefront extends Fragment {
         }else{
             cursor.moveToFirst();
             do {
+                jaye.addCardToDeck(myDB.getImage(cursor.getBlob(1)),
+                        cursor.getString(2),
+                        Integer.parseInt(cursor.getString(3)),
+                        Integer.parseInt(cursor.getString(4)),
+                        Integer.parseInt(cursor.getString(5)),
+                        Integer.parseInt(cursor.getString(6)),
+                        Integer.parseInt(cursor.getString(7)),
+                        Integer.parseInt(cursor.getString(8))
 
-                card_img.add(myDB.getImage(cursor.getBlob(1)));
+                        );
+                /*card_img.add(myDB.getImage(cursor.getBlob(1)));
+                card_stat1.add(cursor.getString(2));
+                card_stat2.add(cursor.getString(3));
+                card_stat3.add(cursor.getString(4));
+                card_stat4.add(cursor.getString(5));
+                card_stat5.add(cursor.getString(6));
+                card_stat6.add(cursor.getString(7));*/
+
 
 
             }while (cursor.moveToNext());

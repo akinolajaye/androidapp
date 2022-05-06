@@ -1,11 +1,15 @@
 package com.example.gamepark;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -17,13 +21,19 @@ import java.util.ArrayList;
 public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHolder> {
 
     private Context context;
-    private ArrayList card_img;
+    private ArrayList<Card> deck;
     public ImageView p1_card;
     public int position;
-    BattleAdapter(Context context, ArrayList card_img, ImageView p1_card){
+    LayoutInflater  inflater  ;
+
+    BattleAdapter(Context context,
+                  ArrayList<Card> deck,
+                  ImageView p1_card){
+
 
         this.context=context;
-        this.card_img=card_img;
+        inflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.deck=deck;
         this.p1_card=p1_card;
 
 
@@ -39,21 +49,26 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BattleAdapter.MyViewHolder holder, int position) {
-        this.position=position;
-        holder.card_img_deck.setImageBitmap((Bitmap) card_img.get(position));
+    public void onBindViewHolder(@NonNull BattleAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        //this.position=position;
+        holder.card_img_deck.setImageBitmap((Bitmap) deck.get(position).char_card);
 
         holder.card_img_deck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                p1_card.setImageBitmap((Bitmap) card_img.get(position));
 
-                /*Bitmap bitmap= Bitmap.createBitmap(holder.playing_card.getWidth(),holder.playing_card.getHeight(), Bitmap.Config.ARGB_8888);//create bitmap object
-                Canvas canvas = new Canvas(bitmap);//create canvas obejct using bitmap
-                holder.playing_card.draw(canvas);//draw to relative layout to store the xml layout as an image
+                View stat_popup=inflater.inflate(R.layout.card_expand_choose,null);
+                // create the popup window
+                int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                boolean focusable = true; // lets taps outside the popup also dismiss it
+                final StatView popupWindow = new StatView(stat_popup, width, height,true,(Bitmap) deck.get(position).char_card);
 
-                ImageView p1= view.findViewById(R.id.player1);
-                p1.setImageBitmap(bitmap);*/
+                // show the popup window
+                // which view you pass in doesn't matter, it is only used for the window tolken
+                popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+
 
 
             }
@@ -65,20 +80,20 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
 
     @Override
     public int getItemCount() {
-        return card_img.size();
+        return deck.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         ImageView card_img_deck;
-        RelativeLayout playing_card;
+
 
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             //card_name_deck=itemView.findViewById(R.id.card_deck_char_name);
             card_img_deck=itemView.findViewById(R.id.card_img_deck);
-            playing_card=itemView.findViewById(R.id.playing_card);
+
 
         }
     }
