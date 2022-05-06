@@ -85,17 +85,6 @@ public class DBHandler extends SQLiteOpenHelper {
         return sql;
 
     }
-    public Cursor getCardTest (String table){
-        SQLiteDatabase db =this.getReadableDatabase();
-        Cursor cursor =db.rawQuery(getCardTestSQL(table),null );
-
-        if (cursor != null) {
-            cursor.moveToFirst();
-        }
-        return cursor;
-
-    }
-
     private String getDeckSQL(String table){
         String sql = "SELECT * FROM "+table+" ";
         return sql;

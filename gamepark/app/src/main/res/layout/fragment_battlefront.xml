@@ -16,10 +16,10 @@
 
         <ImageView
             android:id="@+id/player1"
-            android:layout_width="0.83in"
-            android:layout_height="1.16in"
-            android:layout_marginStart="32dp"
-            android:layout_marginBottom="208dp"
+            android:layout_width="177dp"
+            android:layout_height="217dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="196dp"
             android:adjustViewBounds="true"
             android:cropToPadding="false"
             android:scaleType="fitXY"
@@ -36,6 +36,16 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/stat_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="76dp"
+            android:layout_marginBottom="76dp"
+            android:textSize="50sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

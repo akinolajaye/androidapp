@@ -25,14 +25,9 @@ import java.util.ArrayList;
 
 public class Battlefront extends Fragment {
 
-    private ArrayList<Bitmap> card_img=new ArrayList<>();
-    private ArrayList<String> card_stat1=new ArrayList<>();
-    private ArrayList<String> card_stat2=new ArrayList<>();
-    private ArrayList<String> card_stat3=new ArrayList<>();
-    private ArrayList<String> card_stat4=new ArrayList<>();
-    private ArrayList<String> card_stat5=new ArrayList<>();
-    private ArrayList<String> card_stat6=new ArrayList<>();
     Player jaye=new Player("jaye");
+    public String chosen_stat;
+
 
 
 
@@ -52,16 +47,17 @@ public class Battlefront extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ImageView p1=(ImageView) view.findViewById(R.id.player1);
+        ImageView p1_playing_card=(ImageView) view.findViewById(R.id.player1);
+        TextView stat_title=view.findViewById(R.id.stat_title);
+
+
 
         BattleAdapter battleAdapter;
         RecyclerView recyclerView=(RecyclerView) view.findViewById(R.id.battlefront_deck_view);
 
         addAllCardsToDeck();
 
-        battleAdapter=new BattleAdapter(getContext(), jaye.Deck,
-                p1);
-
+        battleAdapter=new BattleAdapter(getContext(), jaye,p1_playing_card,stat_title);
 
         recyclerView.setAdapter(battleAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));

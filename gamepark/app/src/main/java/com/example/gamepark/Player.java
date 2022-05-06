@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Player {
     public String name;
     public ArrayList<Card> Deck =new ArrayList<>();
+    public int playing_stat;
     public Player(String name){
 
         this.name=name;
@@ -44,6 +45,34 @@ class Card{
         this.stat5=stat5;
         this.stat6=stat6;
 
+
+    }
+
+    public int getChosenStat(String chosen_stat) {
+
+        if (chosen_stat == "stat1") {
+            return stat1;
+
+        } else if (chosen_stat == "stat2") {
+
+            return stat2;
+
+        } else if (chosen_stat == "stat3") {
+
+            return stat3;
+
+        } else if (chosen_stat == "stat4") {
+
+            return stat4;
+        } else if (chosen_stat == "stat5") {
+
+            return stat5;
+        } else if (chosen_stat == "stat6") {
+
+            return stat6;
+        }else {
+            return 0;
+        }
 
 
     }
