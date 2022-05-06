@@ -17,15 +17,21 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 
 public class Battlefront extends Fragment {
 
     Player jaye=new Player("jaye");
+    Player chris=new Player("chris");
+    private RecyclerView recyclerView;
+
     public String chosen_stat;
 
 
@@ -48,14 +54,16 @@ public class Battlefront extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         ImageView p1_playing_card=(ImageView) view.findViewById(R.id.player1);
-        TextView stat_title=view.findViewById(R.id.stat_title);
+        ImageView p2_playing_card=view.findViewById(R.id.player2);
 
+        Button next_play=view.findViewById(R.id.next_play_btn);
+        TextView stat_title=view.findViewById(R.id.stat_title);
+        addAllCardsToDeck(jaye);
+        addAllCardsToDeck(chris);
 
 
         BattleAdapter battleAdapter;
-        RecyclerView recyclerView=(RecyclerView) view.findViewById(R.id.battlefront_deck_view);
-
-        addAllCardsToDeck();
+        recyclerView=(RecyclerView) view.findViewById(R.id.battlefront_deck_view);
 
         battleAdapter=new BattleAdapter(getContext(), jaye,p1_playing_card,stat_title);
 
@@ -63,21 +71,54 @@ public class Battlefront extends Fragment {
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(3, 20, true, 0));
 
+        next_play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                DefenceAdapter defenceAdapter;
+                defenceAdapter =new DefenceAdapter(getContext(), chris,p2_playing_card, battleAdapter.chosen_stat);
+                recyclerView.setAdapter(defenceAdapter);
+                recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
+                recyclerView.addItemDecoration(new GridSpacingItemDecoration(3, 20, true, 0));
+
+            }
+        });
+
     }
 
-    public void addAllCardsToDeck(){
+    public void addAllCardsToDeck(Player player){
         SharedPreferences sp=getContext().getApplicationContext().getSharedPreferences("user_pref", Context.MODE_PRIVATE);
         String current_deck_name=sp.getString("deck_name","");
-
         DBHandler myDB=new DBHandler(getContext());
         Cursor cursor= myDB.getDeck(current_deck_name);
+
+        ArrayList<Card> Deck=new ArrayList<>();
+
+
+
+
+
+
         if(cursor.getCount()==0){
 
 
         }else{
             cursor.moveToFirst();
             do {
-                jaye.addCardToDeck(myDB.getImage(cursor.getBlob(1)),
+
+                Deck.add(new Card(myDB.getImage(cursor.getBlob(1)),
+                        cursor.getString(2),
+                        Integer.parseInt(cursor.getString(3)),
+                        Integer.parseInt(cursor.getString(4)),
+                        Integer.parseInt(cursor.getString(5)),
+                        Integer.parseInt(cursor.getString(6)),
+                        Integer.parseInt(cursor.getString(7)),
+                        Integer.parseInt(cursor.getString(8))));
+
+
+
+
+                player.addCardToDeck(myDB.getImage(cursor.getBlob(1)),
                         cursor.getString(2),
                         Integer.parseInt(cursor.getString(3)),
                         Integer.parseInt(cursor.getString(4)),
@@ -87,17 +128,14 @@ public class Battlefront extends Fragment {
                         Integer.parseInt(cursor.getString(8))
 
                         );
-                /*card_img.add(myDB.getImage(cursor.getBlob(1)));
-                card_stat1.add(cursor.getString(2));
-                card_stat2.add(cursor.getString(3));
-                card_stat3.add(cursor.getString(4));
-                card_stat4.add(cursor.getString(5));
-                card_stat5.add(cursor.getString(6));
-                card_stat6.add(cursor.getString(7));*/
-
-
-
             }while (cursor.moveToNext());
+
+
+            Collections.shuffle(Deck);
+
+            
+
+
         }
     }
 

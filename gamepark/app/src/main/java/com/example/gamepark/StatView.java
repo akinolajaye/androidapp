@@ -9,13 +9,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 
+import org.jetbrains.annotations.Nullable;
+
 public class StatView extends PopupWindow {
 
     Button stat1,stat2,stat3,stat4,stat5,stat6;
 
 
 
-    StatView(View contentView, int width, int height,boolean focusable, Bitmap stat_img){
+    public StatView(View contentView, int width, int height,boolean focusable, Bitmap stat_img){
         super(contentView,width,height,focusable);
 
         SharedPreferences sp=contentView.getContext().getApplicationContext().getSharedPreferences("user_pref", Context.MODE_PRIVATE);
@@ -29,8 +31,6 @@ public class StatView extends PopupWindow {
         stats.moveToNext();
         stats.moveToNext();
         stats.moveToNext();
-
-
 
         stat1 = contentView.findViewById(R.id.stat1_btn);
         stat1.setText(stats.getString(1));
@@ -51,9 +51,16 @@ public class StatView extends PopupWindow {
         stat6.setText(stats.getString(1));
 
 
+    }
 
+    public StatView(View contentView, int width, int height, boolean focusable, Bitmap stat_img, @Nullable int any) {
+        super(contentView, width, height, focusable);
 
+        SharedPreferences sp = contentView.getContext().getApplicationContext().getSharedPreferences("user_pref", Context.MODE_PRIVATE);
+        String current_deck_name = sp.getString("deck_name", "");
 
+        ImageView stat_view = contentView.findViewById(R.id.return_stat_view);
+        stat_view.setImageBitmap(stat_img);
 
     }
 }
