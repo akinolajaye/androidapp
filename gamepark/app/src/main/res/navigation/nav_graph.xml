@@ -57,5 +57,13 @@
         <action
             android:id="@+id/action_deckOfCards_to_createCard"
             app:destination="@id/createCard" />
+        <action
+            android:id="@+id/action_deckOfCards_to_battlefront"
+            app:destination="@id/battlefront" />
     </fragment>
+    <fragment
+        android:id="@+id/battlefront"
+        android:name="com.example.gamepark.Battlefront"
+        android:label="fragment_battlefront"
+        tools:layout="@layout/fragment_battlefront" />
 </navigation>

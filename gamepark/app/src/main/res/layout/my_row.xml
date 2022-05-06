@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:layout_width="0.83in"
     android:layout_height="1.16in"
+    android:id="@+id/playing_card"
 
 
 

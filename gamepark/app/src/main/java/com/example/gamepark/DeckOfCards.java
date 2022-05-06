@@ -49,8 +49,18 @@ public class DeckOfCards extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         CustomAdapter customAdapter;
         RecyclerView recyclerView=(RecyclerView) view.findViewById(R.id.card_deck_view);
+        DBHandler myDB=new DBHandler(getContext());
+
+        displayData();
+        customAdapter=new CustomAdapter(getContext(),card_img);
+        recyclerView.setAdapter(customAdapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(3, 20, true, 0));
+
+
         FloatingActionButton add_new_card_btn= (FloatingActionButton) view.findViewById(R.id.floatingActionButton);
         add_new_card_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,14 +70,17 @@ public class DeckOfCards extends Fragment {
             }
         });
 
-        DBHandler myDB=new DBHandler(getContext());
+        Button play=(Button) view.findViewById(R.id.play_btn);
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navController= Navigation.findNavController(view);
+                navController.navigate((R.id.action_deckOfCards_to_battlefront));//move to the next page
+
+            }
+        });
 
 
-        displayData();
-        customAdapter=new CustomAdapter(getContext(),card_img);
-        recyclerView.setAdapter(customAdapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(3, 20, true, 0));
 
     }
 
