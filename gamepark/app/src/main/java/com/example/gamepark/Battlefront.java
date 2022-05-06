@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -58,8 +59,9 @@ public class Battlefront extends Fragment {
 
         Button next_play=view.findViewById(R.id.next_play_btn);
         TextView stat_title=view.findViewById(R.id.stat_title);
-        addAllCardsToDeck(jaye);
-        addAllCardsToDeck(chris);
+
+        setUpDeck(jaye,chris);
+;
 
 
         BattleAdapter battleAdapter;
@@ -86,18 +88,15 @@ public class Battlefront extends Fragment {
 
     }
 
-    public void addAllCardsToDeck(Player player){
+    public void setUpDeck(Player player1,Player player2){
         SharedPreferences sp=getContext().getApplicationContext().getSharedPreferences("user_pref", Context.MODE_PRIVATE);
         String current_deck_name=sp.getString("deck_name","");
         DBHandler myDB=new DBHandler(getContext());
         Cursor cursor= myDB.getDeck(current_deck_name);
+        ArrayList<Card> player1_deck =new ArrayList<>();
+        ArrayList<Card> player2_deck =new ArrayList<>();
 
         ArrayList<Card> Deck=new ArrayList<>();
-
-
-
-
-
 
         if(cursor.getCount()==0){
 
@@ -115,27 +114,46 @@ public class Battlefront extends Fragment {
                         Integer.parseInt(cursor.getString(7)),
                         Integer.parseInt(cursor.getString(8))));
 
-
-
-
-                player.addCardToDeck(myDB.getImage(cursor.getBlob(1)),
-                        cursor.getString(2),
-                        Integer.parseInt(cursor.getString(3)),
-                        Integer.parseInt(cursor.getString(4)),
-                        Integer.parseInt(cursor.getString(5)),
-                        Integer.parseInt(cursor.getString(6)),
-                        Integer.parseInt(cursor.getString(7)),
-                        Integer.parseInt(cursor.getString(8))
-
-                        );
             }while (cursor.moveToNext());
 
-
+            Log.i("TAG",Deck.toString());
             Collections.shuffle(Deck);
+            int deck_size=Deck.size();
+            //Log.i("TAG",Integer.toString(deck_size));
+            if ((deck_size % 2)==0){
 
-            
+                for(int i=0;i<deck_size/2;i++){
+
+                    player1_deck.add(Deck.get(i));
 
 
+                }
+                for(int i=deck_size/2;i<deck_size;i++){
+
+                    player2_deck.add(Deck.get(i));
+
+                }
+
+            }else{
+
+                for(int i=0;i<deck_size+1/2;i++){
+
+                    player1_deck.add(Deck.get(i));
+
+
+                }
+                for(int i=deck_size+1/2;i<deck_size;i++){
+
+                    player2_deck.add(Deck.get(i));
+
+
+                }
+            }
+
+            player1.Deck=player1_deck;
+            player2.Deck=player2_deck;
+            Log.i("TAG",player1_deck.toString());
+            Log.i("TAG",Deck.toString());
         }
     }
 
