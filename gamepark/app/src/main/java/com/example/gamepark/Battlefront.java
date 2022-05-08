@@ -57,34 +57,16 @@ public class Battlefront extends Fragment {
         ImageView p1_playing_card=(ImageView) view.findViewById(R.id.player1);
         ImageView p2_playing_card=view.findViewById(R.id.player2);
 
-        Button next_play=view.findViewById(R.id.next_play_btn);
         TextView stat_title=view.findViewById(R.id.stat_title);
 
         setUpDeck(jaye,chris);
 ;
-
-
         BattleAdapter battleAdapter;
         recyclerView=(RecyclerView) view.findViewById(R.id.battlefront_deck_view);
-
-        battleAdapter=new BattleAdapter(getContext(), jaye,p1_playing_card,stat_title);
-
-        recyclerView.setAdapter(battleAdapter);
+        battleAdapter=new BattleAdapter(getContext(), jaye,p1_playing_card,stat_title,chris,recyclerView,p2_playing_card);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(3, 20, true, 0));
-
-        next_play.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                DefenceAdapter defenceAdapter;
-                defenceAdapter =new DefenceAdapter(getContext(), chris,p2_playing_card, battleAdapter.chosen_stat);
-                recyclerView.setAdapter(defenceAdapter);
-                recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
-                recyclerView.addItemDecoration(new GridSpacingItemDecoration(3, 20, true, 0));
-
-            }
-        });
+        recyclerView.setAdapter(battleAdapter);
 
     }
 
@@ -158,6 +140,9 @@ public class Battlefront extends Fragment {
     }
 
 
+    public void revealCards(){
+
+    }
 
 }
 

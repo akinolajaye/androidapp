@@ -44,21 +44,12 @@
             android:id="@+id/stat_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_marginBottom="128dp"
+            android:layout_marginBottom="144dp"
             android:textSize="35sp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.511"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/next_play_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="152dp"
-            android:layout_marginTop="4dp"
-            android:text="Player 2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/stat_title" />
 
         <TextView
             android:id="@+id/textView2"

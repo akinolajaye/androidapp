@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,19 +20,27 @@ import java.util.ArrayList;
 public class DefenceAdapter extends RecyclerView.Adapter<DefenceAdapter.MyViewHolder> {
     private Context context;
     private ArrayList<Card> deck;
-    public ImageView playing_card_icon;
-    public Player player;
+    public ImageView playing_card_icon,next_player_icon;
+    public Player player,next_player;
     Button choose_btn;
     LayoutInflater inflater  ;
     public String chosen_stat;
+    TextView stat_title;
+    RecyclerView recyclerView;
 
-    DefenceAdapter(Context context,Player player ,ImageView playing_card_icon,String chosen_stat){
+
+    DefenceAdapter(Context context, Player player , ImageView playing_card_icon, TextView stat_title, Player next_player, RecyclerView recyclerView,
+                   ImageView next_player_icon){
         this.context=context;
         inflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.player=player;
         this.deck=player.Deck;
         this.playing_card_icon=playing_card_icon;
         this.chosen_stat=chosen_stat;
+        this.stat_title=stat_title;
+        this.next_player=next_player;
+        this.recyclerView = recyclerView;
+        this.next_player_icon=next_player_icon;
 
     }
     @NonNull
@@ -69,6 +78,12 @@ public class DefenceAdapter extends RecyclerView.Adapter<DefenceAdapter.MyViewHo
                         viewStatWindow.dismiss();
                         playing_card_icon.setImageBitmap(deck.get(position).char_card);
 
+                        //playing_card_icon.setImageResource(android.R.color.transparent);
+                        //next_player_icon.setImageResource(android.R.color.transparent);
+
+
+                        BattleAdapter battleAdapter = new BattleAdapter(context,player,playing_card_icon,stat_title,next_player,recyclerView,next_player_icon);
+                        recyclerView.setAdapter(battleAdapter);
                     }
                 });
 

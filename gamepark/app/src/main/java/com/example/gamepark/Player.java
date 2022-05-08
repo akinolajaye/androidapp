@@ -8,6 +8,8 @@ public class Player {
     public String name;
     public ArrayList<Card> Deck=new ArrayList<>();
     public int playing_stat;
+    public boolean attacking;
+    public Card playing_card;
     public Player(String name){
 
         this.name=name;

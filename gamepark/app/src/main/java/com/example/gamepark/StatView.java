@@ -47,7 +47,7 @@ public class StatView extends PopupWindow {
         stat5 = contentView.findViewById(R.id.stat5_btn);
         stat5.setText(stats.getString(1));
         stats.moveToNext();
-        stat6 = contentView.findViewById(R.id.stat6_btn);
+        stat6 = contentView.findViewById(R.id.switch_btn);
         stat6.setText(stats.getString(1));
 
 
