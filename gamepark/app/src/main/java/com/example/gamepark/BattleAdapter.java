@@ -3,6 +3,7 @@ package com.example.gamepark;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,9 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
     LayoutInflater  inflater  ;
     public String chosen_stat;
     RecyclerView recyclerView;
+    int card_back_resource;
+    Drawable card_back;
+
 
 
     BattleAdapter(Context context,Player player ,ImageView playing_card_icon,
@@ -44,6 +48,12 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
         this.recyclerView=recyclerView;
         this.next_player_icon=next_player_icon;
         this.reveal_btn=reveal_btn;
+        reveal_btn.setEnabled(false);
+
+        card_back_resource=context.getResources().getIdentifier("@drawable/background_gp_splash",
+                null, context.getPackageName());
+
+        card_back = context.getResources().getDrawable(card_back_resource);
 
 
 
@@ -86,7 +96,7 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
                         player.playing_stat=deck.get(position).stat1;
                         chosen_stat="stat1";
                         viewStatWindow.dismiss();
-                        playing_card_icon.setImageBitmap(deck.get(position).char_card);
+                        playing_card_icon.setImageDrawable(card_back);
                         player.playing_card=deck.get(position);
                         player.card_position=position;
                         stat_title.setText(stat1_btn.getText());
@@ -116,7 +126,7 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
                         player.playing_stat=deck.get(position).stat2;
                         chosen_stat="stat2";
                         viewStatWindow.dismiss();
-                        playing_card_icon.setImageBitmap(deck.get(position).char_card);
+                        playing_card_icon.setImageDrawable(card_back);
                         stat_title.setText(stat2_btn.getText());
                         player.playing_card=deck.get(position);
                         player.card_position=position;
@@ -142,7 +152,7 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
                         player.playing_stat=deck.get(position).stat3;
                         chosen_stat="stat3";
                         viewStatWindow.dismiss();
-                        playing_card_icon.setImageBitmap(deck.get(position).char_card);
+                        playing_card_icon.setImageDrawable(card_back);
                         player.playing_card=deck.get(position);
                         player.card_position=position;
                         stat_title.setText(stat3_btn.getText());
@@ -168,7 +178,7 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
                         player.playing_stat=deck.get(position).stat4;
                         chosen_stat="stat4";
                         viewStatWindow.dismiss();
-                        playing_card_icon.setImageBitmap(deck.get(position).char_card);
+                        playing_card_icon.setImageDrawable(card_back);
                         player.playing_card=deck.get(position);
                         player.card_position=position;
                         stat_title.setText(stat4_btn.getText());
@@ -194,7 +204,7 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
                         player.playing_stat=deck.get(position).stat5;
                         chosen_stat="stat5";
                         viewStatWindow.dismiss();
-                        playing_card_icon.setImageBitmap(deck.get(position).char_card);
+                        playing_card_icon.setImageDrawable(card_back);
                         player.playing_card=deck.get(position);
                         player.card_position=position;
                         stat_title.setText(stat5_btn.getText());
@@ -220,7 +230,7 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
                         player.playing_stat=deck.get(position).stat6;
                         chosen_stat="stat6";
                         viewStatWindow.dismiss();
-                        playing_card_icon.setImageBitmap(deck.get(position).char_card);
+                        playing_card_icon.setImageDrawable(card_back);
                         player.playing_card=deck.get(position);
                         player.card_position=position;
                         stat_title.setText(stat6_btn.getText());

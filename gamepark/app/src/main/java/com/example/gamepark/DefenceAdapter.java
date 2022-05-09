@@ -3,6 +3,7 @@ package com.example.gamepark;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,10 @@ public class DefenceAdapter extends RecyclerView.Adapter<DefenceAdapter.MyViewHo
     public String chosen_stat;
     TextView stat_title;
     RecyclerView recyclerView;
+    int card_back_resource;
+    Drawable card_back;
+
+
 
 
     DefenceAdapter(Context context, Player player , ImageView playing_card_icon, TextView stat_title, Player next_player, RecyclerView recyclerView,
@@ -42,6 +47,12 @@ public class DefenceAdapter extends RecyclerView.Adapter<DefenceAdapter.MyViewHo
         this.recyclerView = recyclerView;
         this.next_player_icon=next_player_icon;
         this.reveal_btn=reveal_btn;
+
+        card_back_resource=context.getResources().getIdentifier("@drawable/background_gp_splash",
+                null, context.getPackageName());
+
+        card_back = context.getResources().getDrawable(card_back_resource);
+
 
     }
     @NonNull
@@ -76,19 +87,24 @@ public class DefenceAdapter extends RecyclerView.Adapter<DefenceAdapter.MyViewHo
                     public void onClick(View view) {
                         player.playing_stat=deck.get(position).getChosenStat(chosen_stat);
                         viewStatWindow.dismiss();
-                        playing_card_icon.setImageBitmap(deck.get(position).char_card);
+                        playing_card_icon.setImageDrawable(card_back);
                         player.playing_card=deck.get(position);
                         player.card_position=position;
+                        reveal_btn.setEnabled(true);
+                        
 
 
                         reveal_btn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 View reveal_popup=inflater.inflate(R.layout.reveal,null);
-                                int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-                                int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                                int width = LinearLayout.LayoutParams.MATCH_PARENT;
+                                int height = LinearLayout.LayoutParams.MATCH_PARENT;
                                 Reveal reveal= new Reveal(reveal_popup,width,height,true,player,next_player,player.card_position,next_player.card_position);
                                 reveal.showAtLocation(view,Gravity.CENTER,0,0);
+                                stat_title.setText("");
+                                playing_card_icon.setImageResource(android.R.color.transparent);
+                                next_player_icon.setImageResource(android.R.color.transparent);
 
                                 BattleAdapter battleAdapter = new BattleAdapter(context,player,playing_card_icon,stat_title,next_player,recyclerView,next_player_icon,reveal_btn);
                                 recyclerView.setAdapter(battleAdapter);
@@ -96,8 +112,7 @@ public class DefenceAdapter extends RecyclerView.Adapter<DefenceAdapter.MyViewHo
                         });
 
 
-                        //playing_card_icon.setImageResource(android.R.color.transparent);
-                        //next_player_icon.setImageResource(android.R.color.transparent);
+
 
 
 
