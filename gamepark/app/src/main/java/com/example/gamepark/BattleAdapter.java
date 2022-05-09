@@ -25,7 +25,7 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
     TextView stat_title;
     public Player player;
     public  Player next_player;
-    Button stat1_btn,stat2_btn,stat3_btn,stat4_btn,stat5_btn,stat6_btn;
+    Button stat1_btn,stat2_btn,stat3_btn,stat4_btn,stat5_btn,stat6_btn,reveal_btn;
     LayoutInflater  inflater  ;
     public String chosen_stat;
     RecyclerView recyclerView;
@@ -33,7 +33,7 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
 
     BattleAdapter(Context context,Player player ,ImageView playing_card_icon,
                   TextView stat_title,Player next_player,RecyclerView recyclerView,
-                  ImageView next_player_icon){
+                  ImageView next_player_icon,Button reveal_btn){
         this.context=context;
         inflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.player=player;
@@ -43,6 +43,7 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
         this.next_player=next_player;
         this.recyclerView=recyclerView;
         this.next_player_icon=next_player_icon;
+        this.reveal_btn=reveal_btn;
 
 
 
@@ -86,13 +87,16 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
                         chosen_stat="stat1";
                         viewStatWindow.dismiss();
                         playing_card_icon.setImageBitmap(deck.get(position).char_card);
+                        player.playing_card=deck.get(position);
+                        player.card_position=position;
                         stat_title.setText(stat1_btn.getText());
 
 
                         View switch_turn =inflater.inflate(R.layout.switch_turn,null);
                         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
                         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-                        DefenceAdapter defenceAdapter = new DefenceAdapter(context, next_player, next_player_icon,stat_title,player,recyclerView,playing_card_icon);
+                        DefenceAdapter defenceAdapter = new DefenceAdapter(context, next_player,
+                                next_player_icon,stat_title,player,recyclerView,playing_card_icon,chosen_stat,reveal_btn);
                         final SwitchTurn switchTurn = new SwitchTurn(switch_turn, width, height,
                                 false,next_player,defenceAdapter,recyclerView);
 
@@ -114,14 +118,19 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
                         viewStatWindow.dismiss();
                         playing_card_icon.setImageBitmap(deck.get(position).char_card);
                         stat_title.setText(stat2_btn.getText());
-                        /*View switch_turn =inflater.inflate(R.layout.switch_turn,null);
+                        player.playing_card=deck.get(position);
+                        player.card_position=position;
+
+
+                        View switch_turn =inflater.inflate(R.layout.switch_turn,null);
                         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
                         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-                        DefenceAdapter defenceAdapter = new DefenceAdapter(context, next_player, next_player_icon, chosen_stat);
+                        DefenceAdapter defenceAdapter = new DefenceAdapter(context,
+                                next_player, next_player_icon,stat_title,player,recyclerView,playing_card_icon,chosen_stat,reveal_btn);
                         final SwitchTurn switchTurn = new SwitchTurn(switch_turn, width, height,
                                 false,next_player,defenceAdapter,recyclerView);
 
-                        switchTurn.showAtLocation(view,Gravity.CENTER,0,0);*/
+                        switchTurn.showAtLocation(view,Gravity.CENTER,0,0);
 
                     }
                 });
@@ -134,15 +143,20 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
                         chosen_stat="stat3";
                         viewStatWindow.dismiss();
                         playing_card_icon.setImageBitmap(deck.get(position).char_card);
+                        player.playing_card=deck.get(position);
+                        player.card_position=position;
                         stat_title.setText(stat3_btn.getText());
-                        /*View switch_turn =inflater.inflate(R.layout.switch_turn,null);
+
+
+                        View switch_turn =inflater.inflate(R.layout.switch_turn,null);
                         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
                         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-                        DefenceAdapter defenceAdapter = new DefenceAdapter(context, next_player, next_player_icon, chosen_stat);
+                        DefenceAdapter defenceAdapter = new DefenceAdapter(context, next_player,
+                                next_player_icon,stat_title,player,recyclerView,playing_card_icon,chosen_stat,reveal_btn);
                         final SwitchTurn switchTurn = new SwitchTurn(switch_turn, width, height,
                                 false,next_player,defenceAdapter,recyclerView);
 
-                        switchTurn.showAtLocation(view,Gravity.CENTER,0,0);*/
+                        switchTurn.showAtLocation(view,Gravity.CENTER,0,0);
 
 
                     }
@@ -155,15 +169,20 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
                         chosen_stat="stat4";
                         viewStatWindow.dismiss();
                         playing_card_icon.setImageBitmap(deck.get(position).char_card);
+                        player.playing_card=deck.get(position);
+                        player.card_position=position;
                         stat_title.setText(stat4_btn.getText());
-                        /*View switch_turn =inflater.inflate(R.layout.switch_turn,null);
+
+
+                        View switch_turn =inflater.inflate(R.layout.switch_turn,null);
                         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
                         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-                        DefenceAdapter defenceAdapter = new DefenceAdapter(context, next_player, next_player_icon, chosen_stat);
+                        DefenceAdapter defenceAdapter = new DefenceAdapter(context, next_player,
+                                next_player_icon,stat_title,player,recyclerView,playing_card_icon,chosen_stat,reveal_btn);
                         final SwitchTurn switchTurn = new SwitchTurn(switch_turn, width, height,
                                 false,next_player,defenceAdapter,recyclerView);
 
-                        switchTurn.showAtLocation(view,Gravity.CENTER,0,0);*/
+                        switchTurn.showAtLocation(view,Gravity.CENTER,0,0);
 
 
                     }
@@ -176,15 +195,20 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
                         chosen_stat="stat5";
                         viewStatWindow.dismiss();
                         playing_card_icon.setImageBitmap(deck.get(position).char_card);
+                        player.playing_card=deck.get(position);
+                        player.card_position=position;
                         stat_title.setText(stat5_btn.getText());
-                        /*View switch_turn =inflater.inflate(R.layout.switch_turn,null);
+
+
+                        View switch_turn =inflater.inflate(R.layout.switch_turn,null);
                         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
                         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-                        DefenceAdapter defenceAdapter = new DefenceAdapter(context, next_player, next_player_icon, chosen_stat);
+                        DefenceAdapter defenceAdapter = new DefenceAdapter(context, next_player,
+                                next_player_icon,stat_title,player,recyclerView,playing_card_icon,chosen_stat,reveal_btn);
                         final SwitchTurn switchTurn = new SwitchTurn(switch_turn, width, height,
                                 false,next_player,defenceAdapter,recyclerView);
 
-                        switchTurn.showAtLocation(view,Gravity.CENTER,0,0);*/
+                        switchTurn.showAtLocation(view,Gravity.CENTER,0,0);
 
 
                     }
@@ -197,27 +221,24 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
                         chosen_stat="stat6";
                         viewStatWindow.dismiss();
                         playing_card_icon.setImageBitmap(deck.get(position).char_card);
+                        player.playing_card=deck.get(position);
+                        player.card_position=position;
                         stat_title.setText(stat6_btn.getText());
-                        /*View switch_turn =inflater.inflate(R.layout.switch_turn,null);
+
+
+                        View switch_turn =inflater.inflate(R.layout.switch_turn,null);
                         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
                         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-                        DefenceAdapter defenceAdapter = new DefenceAdapter(context, next_player, next_player_icon, chosen_stat);
+                        DefenceAdapter defenceAdapter = new DefenceAdapter(context, next_player,
+                                next_player_icon,stat_title,player,recyclerView,playing_card_icon,chosen_stat,reveal_btn);
                         final SwitchTurn switchTurn = new SwitchTurn(switch_turn, width, height,
                                 false,next_player,defenceAdapter,recyclerView);
 
-                        switchTurn.showAtLocation(view,Gravity.CENTER,0,0);*/
+                        switchTurn.showAtLocation(view,Gravity.CENTER,0,0);
 
 
                     }
                 });
-
-
-
-
-
-
-
-
 
 
 

@@ -14,12 +14,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -58,15 +60,17 @@ public class Battlefront extends Fragment {
         ImageView p2_playing_card=view.findViewById(R.id.player2);
 
         TextView stat_title=view.findViewById(R.id.stat_title);
+        Button reveal_btn=view.findViewById(R.id.reveal_btn);
 
         setUpDeck(jaye,chris);
 ;
         BattleAdapter battleAdapter;
         recyclerView=(RecyclerView) view.findViewById(R.id.battlefront_deck_view);
-        battleAdapter=new BattleAdapter(getContext(), jaye,p1_playing_card,stat_title,chris,recyclerView,p2_playing_card);
+        battleAdapter=new BattleAdapter(getContext(), jaye,p1_playing_card,stat_title,chris,recyclerView,p2_playing_card,reveal_btn);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(3, 20, true, 0));
         recyclerView.setAdapter(battleAdapter);
+        
 
     }
 

@@ -22,7 +22,7 @@ public class DefenceAdapter extends RecyclerView.Adapter<DefenceAdapter.MyViewHo
     private ArrayList<Card> deck;
     public ImageView playing_card_icon,next_player_icon;
     public Player player,next_player;
-    Button choose_btn;
+    Button choose_btn,reveal_btn;
     LayoutInflater inflater  ;
     public String chosen_stat;
     TextView stat_title;
@@ -30,7 +30,7 @@ public class DefenceAdapter extends RecyclerView.Adapter<DefenceAdapter.MyViewHo
 
 
     DefenceAdapter(Context context, Player player , ImageView playing_card_icon, TextView stat_title, Player next_player, RecyclerView recyclerView,
-                   ImageView next_player_icon){
+                   ImageView next_player_icon,String chosen_stat, Button reveal_btn){
         this.context=context;
         inflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.player=player;
@@ -41,6 +41,7 @@ public class DefenceAdapter extends RecyclerView.Adapter<DefenceAdapter.MyViewHo
         this.next_player=next_player;
         this.recyclerView = recyclerView;
         this.next_player_icon=next_player_icon;
+        this.reveal_btn=reveal_btn;
 
     }
     @NonNull
@@ -64,9 +65,8 @@ public class DefenceAdapter extends RecyclerView.Adapter<DefenceAdapter.MyViewHo
                 // create the popup window
                 int width = LinearLayout.LayoutParams.WRAP_CONTENT;
                 int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-                boolean focusable = true; // lets taps outside the popup also dismiss it
                 final StatView viewStatWindow = new StatView(stat_popup, width, height, true, (Bitmap) deck.get(position).char_card,0);
-                // show the popup window
+
                 viewStatWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
 
@@ -77,13 +77,30 @@ public class DefenceAdapter extends RecyclerView.Adapter<DefenceAdapter.MyViewHo
                         player.playing_stat=deck.get(position).getChosenStat(chosen_stat);
                         viewStatWindow.dismiss();
                         playing_card_icon.setImageBitmap(deck.get(position).char_card);
+                        player.playing_card=deck.get(position);
+                        player.card_position=position;
+
+
+                        reveal_btn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                View reveal_popup=inflater.inflate(R.layout.reveal,null);
+                                int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                                int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                                Reveal reveal= new Reveal(reveal_popup,width,height,true,player,next_player,player.card_position,next_player.card_position);
+                                reveal.showAtLocation(view,Gravity.CENTER,0,0);
+
+                                BattleAdapter battleAdapter = new BattleAdapter(context,player,playing_card_icon,stat_title,next_player,recyclerView,next_player_icon,reveal_btn);
+                                recyclerView.setAdapter(battleAdapter);
+                            }
+                        });
+
 
                         //playing_card_icon.setImageResource(android.R.color.transparent);
                         //next_player_icon.setImageResource(android.R.color.transparent);
 
 
-                        BattleAdapter battleAdapter = new BattleAdapter(context,player,playing_card_icon,stat_title,next_player,recyclerView,next_player_icon);
-                        recyclerView.setAdapter(battleAdapter);
+
                     }
                 });
 

@@ -8,7 +8,7 @@ import android.widget.PopupWindow;
 public class Reveal extends PopupWindow {
 
     public Reveal(View contentView, int width, int height, boolean focusable,
-                      Player p1,Player p2,DefenceAdapter defenceAdapter,int p1_position, int p2_position ){
+                      Player p1,Player p2,int p1_position, int p2_position ){
         super(contentView,width,height,focusable);
 
         ImageView p1_reveal = contentView.findViewById(R.id.p1_reveal);
@@ -38,10 +38,4 @@ public class Reveal extends PopupWindow {
 
     }
 
-    @Override
-    public void setOnDismissListener(OnDismissListener onDismissListener) {
-        super.setOnDismissListener(onDismissListener);
-
-
-    }
 }

@@ -7,24 +7,12 @@ import java.util.ArrayList;
 public class Player {
     public String name;
     public ArrayList<Card> Deck=new ArrayList<>();
-    public int playing_stat;
-    public boolean attacking;
+    public int playing_stat,card_position;
     public Card playing_card;
     public Player(String name){
 
         this.name=name;
     }
-
-
-    public void addCardToDeck(Bitmap char_card,String char_name,int stat1,int stat2,int stat3,int stat4,int stat5,int stat6){
-
-        Card card=new Card(char_card,char_name,stat1,stat2,stat3,stat4,stat5,stat6);
-        Deck.add(card);
-
-
-
-    }
-
 
 
 }
