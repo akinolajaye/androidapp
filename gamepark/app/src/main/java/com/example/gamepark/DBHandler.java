@@ -80,6 +80,30 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
 
+
+
+    private String getDecksNameSQL(){
+
+        String sql ="SELECT name FROM sqlite_master\n" +
+                "WHERE type='table' AND name !='android_metadata' AND name !='sqlite_sequence'\n" +
+                "ORDER BY name";
+
+        return sql;
+
+    }
+
+    public Cursor getDecksName(){
+        SQLiteDatabase db =this.getReadableDatabase();
+
+        Cursor cursor =db.rawQuery(getDecksNameSQL(),null );
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        return cursor;
+
+    }
+
     private String getCardTestSQL(String table){
         String sql = "SELECT char_img FROM "+table+" ";
         return sql;

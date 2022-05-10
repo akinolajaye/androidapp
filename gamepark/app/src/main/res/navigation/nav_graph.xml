@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_landingScreen_to_newDeck"
             app:destination="@id/newDeck" />
+        <action
+            android:id="@+id/action_landingScreen_to_viewLibrary"
+            app:destination="@id/viewLibrary" />
     </fragment>
     <fragment
         android:id="@+id/newDeck"
@@ -65,5 +68,18 @@
         android:id="@+id/battlefront"
         android:name="com.example.gamepark.Battlefront"
         android:label="fragment_battlefront"
-        tools:layout="@layout/fragment_battlefront" />
+        tools:layout="@layout/fragment_battlefront" >
+        <action
+            android:id="@+id/action_battlefront_to_deckOfCards"
+            app:destination="@id/deckOfCards" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewLibrary"
+        android:name="com.example.gamepark.ViewLibrary"
+        android:label="fragment_view_library"
+        tools:layout="@layout/fragment_view_library" >
+        <action
+            android:id="@+id/action_viewLibrary_to_deckOfCards"
+            app:destination="@id/deckOfCards" />
+    </fragment>
 </navigation>

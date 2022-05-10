@@ -16,9 +16,12 @@
         <entry key="app/src/main/res/layout/fragment_new_deck.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/fragment_start_screen.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/fragment_view_card.xml" value="0.4404556274414063" />
+        <entry key="app/src/main/res/layout/fragment_view_library.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/library_cells.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/my_row.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/reveal.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/switch_turn.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/view_library.xml" value="0.24351851851851852" />
       </map>
     </option>
   </component>

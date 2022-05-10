@@ -2,13 +2,10 @@ package com.example.gamepark;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,7 +52,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             //card_name_deck=itemView.findViewById(R.id.card_deck_char_name);
-            card_img_deck=itemView.findViewById(R.id.card_img_deck);
+            card_img_deck=itemView.findViewById(R.id.deck_img);
 
 
         }

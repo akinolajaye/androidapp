@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavController;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -32,12 +33,13 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
     RecyclerView recyclerView;
     int card_back_resource;
     Drawable card_back;
+    NavController navController;
 
 
 
-    BattleAdapter(Context context,Player player ,ImageView playing_card_icon,
-                  TextView stat_title,Player next_player,RecyclerView recyclerView,
-                  ImageView next_player_icon,Button reveal_btn){
+    BattleAdapter(Context context, Player player , ImageView playing_card_icon,
+                  TextView stat_title, Player next_player, RecyclerView recyclerView,
+                  ImageView next_player_icon, Button reveal_btn, NavController navController){
         this.context=context;
         inflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.player=player;
@@ -48,6 +50,7 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
         this.recyclerView=recyclerView;
         this.next_player_icon=next_player_icon;
         this.reveal_btn=reveal_btn;
+        this.navController=navController;
         reveal_btn.setEnabled(false);
 
         card_back_resource=context.getResources().getIdentifier("@drawable/background_gp_splash",
@@ -101,12 +104,13 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
                         player.card_position=position;
                         stat_title.setText(stat1_btn.getText());
 
-
+                        DefenceAdapter defenceAdapter = new DefenceAdapter(context, next_player,
+                                next_player_icon,stat_title,player,recyclerView,
+                                playing_card_icon,chosen_stat,reveal_btn,navController);
                         View switch_turn =inflater.inflate(R.layout.switch_turn,null);
                         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
                         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-                        DefenceAdapter defenceAdapter = new DefenceAdapter(context, next_player,
-                                next_player_icon,stat_title,player,recyclerView,playing_card_icon,chosen_stat,reveal_btn);
+
                         final SwitchTurn switchTurn = new SwitchTurn(switch_turn, width, height,
                                 false,next_player,defenceAdapter,recyclerView);
 
@@ -136,7 +140,7 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
                         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
                         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
                         DefenceAdapter defenceAdapter = new DefenceAdapter(context,
-                                next_player, next_player_icon,stat_title,player,recyclerView,playing_card_icon,chosen_stat,reveal_btn);
+                                next_player, next_player_icon,stat_title,player,recyclerView,playing_card_icon,chosen_stat,reveal_btn,navController);
                         final SwitchTurn switchTurn = new SwitchTurn(switch_turn, width, height,
                                 false,next_player,defenceAdapter,recyclerView);
 
@@ -162,7 +166,7 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
                         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
                         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
                         DefenceAdapter defenceAdapter = new DefenceAdapter(context, next_player,
-                                next_player_icon,stat_title,player,recyclerView,playing_card_icon,chosen_stat,reveal_btn);
+                                next_player_icon,stat_title,player,recyclerView,playing_card_icon,chosen_stat,reveal_btn,navController);
                         final SwitchTurn switchTurn = new SwitchTurn(switch_turn, width, height,
                                 false,next_player,defenceAdapter,recyclerView);
 
@@ -188,7 +192,7 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
                         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
                         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
                         DefenceAdapter defenceAdapter = new DefenceAdapter(context, next_player,
-                                next_player_icon,stat_title,player,recyclerView,playing_card_icon,chosen_stat,reveal_btn);
+                                next_player_icon,stat_title,player,recyclerView,playing_card_icon,chosen_stat,reveal_btn,navController);
                         final SwitchTurn switchTurn = new SwitchTurn(switch_turn, width, height,
                                 false,next_player,defenceAdapter,recyclerView);
 
@@ -214,7 +218,7 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
                         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
                         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
                         DefenceAdapter defenceAdapter = new DefenceAdapter(context, next_player,
-                                next_player_icon,stat_title,player,recyclerView,playing_card_icon,chosen_stat,reveal_btn);
+                                next_player_icon,stat_title,player,recyclerView,playing_card_icon,chosen_stat,reveal_btn,navController);
                         final SwitchTurn switchTurn = new SwitchTurn(switch_turn, width, height,
                                 false,next_player,defenceAdapter,recyclerView);
 
@@ -240,7 +244,7 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
                         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
                         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
                         DefenceAdapter defenceAdapter = new DefenceAdapter(context, next_player,
-                                next_player_icon,stat_title,player,recyclerView,playing_card_icon,chosen_stat,reveal_btn);
+                                next_player_icon,stat_title,player,recyclerView,playing_card_icon,chosen_stat,reveal_btn,navController);
                         final SwitchTurn switchTurn = new SwitchTurn(switch_turn, width, height,
                                 false,next_player,defenceAdapter,recyclerView);
 
@@ -271,7 +275,7 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             //card_name_deck=itemView.findViewById(R.id.card_deck_char_name);
-            card_img_deck=itemView.findViewById(R.id.card_img_deck);
+            card_img_deck=itemView.findViewById(R.id.deck_img);
 
 
         }

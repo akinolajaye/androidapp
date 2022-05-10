@@ -10,6 +10,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,7 +35,7 @@ public class Battlefront extends Fragment {
 
     Player jaye=new Player("jaye");
     Player chris=new Player("chris");
-    private RecyclerView recyclerView;
+    public RecyclerView recyclerView;
 
     public String chosen_stat;
 
@@ -66,7 +68,8 @@ public class Battlefront extends Fragment {
 ;
         BattleAdapter battleAdapter;
         recyclerView=(RecyclerView) view.findViewById(R.id.battlefront_deck_view);
-        battleAdapter=new BattleAdapter(getContext(), jaye,p1_playing_card,stat_title,chris,recyclerView,p2_playing_card,reveal_btn);
+        NavController navController= Navigation.findNavController(view);
+        battleAdapter=new BattleAdapter(getContext(), jaye,p1_playing_card,stat_title,chris,recyclerView,p2_playing_card,reveal_btn,navController);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(3, 20, true, 0));
         recyclerView.setAdapter(battleAdapter);
@@ -122,13 +125,13 @@ public class Battlefront extends Fragment {
 
             }else{
 
-                for(int i=0;i<deck_size+1/2;i++){
+                for(int i=0;i<(deck_size+1)/2;i++){
 
                     player1_deck.add(Deck.get(i));
 
 
                 }
-                for(int i=deck_size+1/2;i<deck_size;i++){
+                for(int i=(deck_size+1)/2;i<deck_size;i++){
 
                     player2_deck.add(Deck.get(i));
 
@@ -138,15 +141,11 @@ public class Battlefront extends Fragment {
 
             player1.Deck=player1_deck;
             player2.Deck=player2_deck;
-            Log.i("TAG",player1_deck.toString());
-            Log.i("TAG",Deck.toString());
+
         }
     }
 
 
-    public void revealCards(){
-
-    }
 
 }
 

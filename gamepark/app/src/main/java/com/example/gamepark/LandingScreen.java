@@ -47,5 +47,14 @@ public class LandingScreen extends Fragment {
 
             }
         });
+
+        Button view_lib=view.findViewById(R.id.view_lib_btn);
+        view_lib.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navController.navigate((R.id.action_landingScreen_to_viewLibrary)); //move to next page
+
+            }
+        });
     }
 }
