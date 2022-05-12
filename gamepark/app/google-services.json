@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "123775637274",
+    "project_id": "gamepark-a6da2",
+    "storage_bucket": "gamepark-a6da2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:123775637274:android:616db8f6c75016f3947ea3",
+        "android_client_info": {
+          "package_name": "com.example.gamepark"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "123775637274-poc9slp0rqbvl7cb2nr22gkghenu6buv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiJveDvv0J0-2gQqftYrjZ0P0UTAcmSC4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "123775637274-poc9slp0rqbvl7cb2nr22gkghenu6buv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

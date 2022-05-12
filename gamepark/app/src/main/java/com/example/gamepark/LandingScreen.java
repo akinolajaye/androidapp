@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 
 public class LandingScreen extends Fragment {
 
@@ -54,6 +56,15 @@ public class LandingScreen extends Fragment {
             public void onClick(View view) {
                 navController.navigate((R.id.action_landingScreen_to_viewLibrary)); //move to next page
 
+            }
+        });
+
+        Button logout=view.findViewById(R.id.logout_btn);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getContext().getApplicationContext(),Login.class));
             }
         });
     }
