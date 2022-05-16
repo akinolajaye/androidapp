@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,22 +13,31 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
 import java.util.ArrayList;
 
 
 public class DeckOfCards extends Fragment {
+
+    public StorageReference storageReference,deck_ref;
+    public FirebaseStorage firebaseStorage;
+    public FirebaseAuth firebaseAuth;
 
 
 
@@ -49,6 +59,11 @@ public class DeckOfCards extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        firebaseStorage= FirebaseStorage.getInstance();
+        storageReference=firebaseStorage.getReference();
+        firebaseAuth = FirebaseAuth.getInstance();
+        deck_ref= storageReference.child(firebaseAuth.getCurrentUser().getUid());
 
         CustomAdapter customAdapter;
         RecyclerView recyclerView=(RecyclerView) view.findViewById(R.id.card_deck_view);
@@ -80,8 +95,60 @@ public class DeckOfCards extends Fragment {
             }
         });
 
+        Button save_deck= (Button) view.findViewById(R.id.save);
+        save_deck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveDeck(deck_ref);
+            }
+        });
 
 
+
+
+    }
+
+    private void saveDeck(StorageReference deck_ref) {
+
+        try {
+
+
+            deck_ref.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    // File deleted successfully
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Uh-oh, an error occurred!
+
+                }
+            });
+        }catch ( Exception  e){
+
+        };
+
+        File file = new File("/data/user/0/com.example.gamepark/databases/decks.db");
+
+        Uri deck_uri=Uri.fromFile(file);
+
+        UploadTask uploadTask = deck_ref.putFile(deck_uri);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+                Log.d("TAG",file.toString());
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+
+
+            }
+        });
     }
 
     public void displayData(){

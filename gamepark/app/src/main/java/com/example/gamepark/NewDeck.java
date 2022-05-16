@@ -63,15 +63,6 @@ public class NewDeck extends Fragment {
                 editor.putString("deck_name",name_of_deck);
                 editor.commit();
 
-                /*getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getActivity(),"Made", Toast.LENGTH_SHORT).show();
-
-
-                    }
-                });*/
-
 
 
 
@@ -82,8 +73,8 @@ public class NewDeck extends Fragment {
 
 
 
-                //myDB.newDeck(name_of_deck,stat1_val,stat2_val, //add table to database
-                        //stat3_val,stat4_val,stat5_val,stat6_val);
+                myDB.newDeck(name_of_deck,stat1_val,stat2_val, //add table to database
+                        stat3_val,stat4_val,stat5_val,stat6_val);
 
 
 

@@ -19,6 +19,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,10 +29,22 @@ import android.widget.RelativeLayout;
 import android.widget.TextClock;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Random;
 
 public class ViewCard extends Fragment {
@@ -47,6 +60,11 @@ public class ViewCard extends Fragment {
 
             ;
     private byte[] char_icon;
+    StorageReference storageReference;
+    FirebaseStorage firebaseStorage;
+    FirebaseAuth firebaseAuth;
+
+
     public ViewCard() {
         // Required empty public constructor
     }
@@ -90,6 +108,11 @@ public class ViewCard extends Fragment {
         SharedPreferences sp=getContext().getApplicationContext().getSharedPreferences("user_pref", Context.MODE_PRIVATE);
         String current_deck_name=sp.getString("deck_name","");
         add_button.setEnabled(false);
+        firebaseStorage=FirebaseStorage.getInstance();
+        storageReference=firebaseStorage.getReference();
+        firebaseAuth = FirebaseAuth.getInstance();
+        StorageReference deck_ref= storageReference.child(firebaseAuth.getCurrentUser().getUid());
+
 
         //gets all the xml text view objects that will store the stats
         final RelativeLayout relativeLayout= view.findViewById(R.id.rlayout);
@@ -108,8 +131,6 @@ public class ViewCard extends Fragment {
         TextView stat6_lbl=(TextView) view.findViewById(R.id.card_stat6_lbl);
         TextView stat6=(TextView) view.findViewById(R.id.card_stat6);
         ImageView card_img = (ImageView) view.findViewById(R.id.card_icon);
-
-
 
 
         //sets the text on the xml to the values from the bundle
@@ -132,6 +153,11 @@ public class ViewCard extends Fragment {
                 stat6.setText(frag_stat6);
 
                 add_button.setEnabled(true);
+
+
+
+
+
 
             }
         });
@@ -163,11 +189,15 @@ public class ViewCard extends Fragment {
 
                 NavController navController= Navigation.findNavController(view);
                 navController.navigate((R.id.action_viewCard_to_deckOfCards));//move to the next page
+
+
+
             }
         });
 
 
     }
+
 
     // convert from bitmap to byte array
     public static byte[] getBytes(Bitmap bitmap) {

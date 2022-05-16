@@ -3,13 +3,19 @@ package com.example.gamepark;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.database.Cursor;
+import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Environment;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
+
+import java.io.File;
 
 public class DBHandler extends SQLiteOpenHelper {
 
@@ -18,8 +24,10 @@ public class DBHandler extends SQLiteOpenHelper {
 
 
     public DBHandler(@Nullable Context context) {
-        super(context, DB_NAME, null, DB_VERSION);
+        super(new DatabaseContext(context), DB_NAME, null, DB_VERSION);
     }
+
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -160,5 +168,52 @@ public class DBHandler extends SQLiteOpenHelper {
     // convert from byte array to bitmap
     public  Bitmap getImage(byte[] image) {
         return BitmapFactory.decodeByteArray(image, 0, image.length);
+    }
+}
+
+class DatabaseContext extends ContextWrapper {
+
+    private static final String DEBUG_CONTEXT = "DatabaseContext";
+
+    public DatabaseContext(Context base) {
+        super(base);
+    }
+
+    @Override
+    public File getDatabasePath(String name)  {
+        File sdcard = Environment.getExternalStorageDirectory();
+        String dbfile = sdcard.getAbsolutePath() + File.separator+ "Download" + File.separator + name;
+        if (!dbfile.endsWith(".db")) {
+            dbfile += ".db" ;
+        }
+
+        File result = new File(dbfile);
+
+        if (!result.getParentFile().exists()) {
+            result.getParentFile().mkdirs();
+        }
+
+        if (Log.isLoggable(DEBUG_CONTEXT, Log.WARN)) {
+            Log.w(DEBUG_CONTEXT, "getDatabasePath(" + name + ") = " + result.getAbsolutePath());
+        }
+
+        return result;
+    }
+
+    /* this version is called for android devices >= api-11. thank to @damccull for fixing this. */
+    @Override
+    public SQLiteDatabase openOrCreateDatabase(String name, int mode, SQLiteDatabase.CursorFactory factory, DatabaseErrorHandler errorHandler) {
+        return openOrCreateDatabase(name,mode, factory);
+    }
+
+    /* this version is called for android devices < api-11 */
+    @Override
+    public SQLiteDatabase openOrCreateDatabase(String name, int mode, SQLiteDatabase.CursorFactory factory) {
+        SQLiteDatabase result = SQLiteDatabase.openOrCreateDatabase(getDatabasePath(name), null);
+        // SQLiteDatabase result = super.openOrCreateDatabase(name, mode, factory);
+        if (Log.isLoggable(DEBUG_CONTEXT, Log.WARN)) {
+            Log.w(DEBUG_CONTEXT, "openOrCreateDatabase(" + name + ",,) = " + result.getPath());
+        }
+        return result;
     }
 }

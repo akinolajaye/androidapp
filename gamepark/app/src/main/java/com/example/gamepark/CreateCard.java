@@ -123,6 +123,8 @@ public class CreateCard extends Fragment {
             }
         });
 
+
+
         Button addCard = (Button) view.findViewById(R.id.add_char);//listener for button to add character
         addCard.setOnClickListener(new View.OnClickListener() {
 
