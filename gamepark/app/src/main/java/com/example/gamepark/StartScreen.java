@@ -1,5 +1,8 @@
 package com.example.gamepark;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +19,8 @@ import android.widget.Button;
 
 public class StartScreen extends Fragment {
 
+    SharedPreferences sp;
+
     public StartScreen() {
         // Required empty public constructor
     }
@@ -31,6 +36,7 @@ public class StartScreen extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        new PlayBackSound(getContext(),R.raw.zelda);
 
         NavController navController=Navigation.findNavController(view);
 
@@ -44,6 +50,7 @@ public class StartScreen extends Fragment {
             }
         });
     }
+
 
     
 

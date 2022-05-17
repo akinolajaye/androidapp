@@ -1,6 +1,7 @@
 package com.example.gamepark;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -55,6 +56,12 @@ public class Battlefront extends Fragment {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        getContext().startService(new Intent(getContext(),Reminder.class));
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -63,6 +70,7 @@ public class Battlefront extends Fragment {
 
         TextView stat_title=view.findViewById(R.id.stat_title);
         Button reveal_btn=view.findViewById(R.id.reveal_btn);
+        new PlayBackSound(getContext(),R.raw.battle);
 
         setUpDeck(jaye,chris);
 ;

@@ -15,9 +15,13 @@
         android:theme="@style/Theme.Gamepark"
         android:usesCleartextTraffic="true">
         <service
-            android:name=".StartMusic"
+            android:name=".Reminder"
             android:enabled="true"
             android:exported="true"></service>
+        <service
+            android:name=".StartMusic"
+            android:enabled="true"
+            android:exported="true" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -49,6 +53,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
+
+        <receiver android:name=".RemindPlay" />
     </application>
 
 </manifest>
