@@ -15,6 +15,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -130,7 +131,7 @@ public class DeckOfCards extends Fragment {
 
         };
 
-        File file = new File("/data/user/0/com.example.gamepark/databases/decks.db");
+        File file = new File(Environment.getExternalStorageDirectory(), "Download/decks.db");
 
         Uri deck_uri=Uri.fromFile(file);
 

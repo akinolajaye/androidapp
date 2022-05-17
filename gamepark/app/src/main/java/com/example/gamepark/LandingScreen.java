@@ -14,9 +14,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 
 
@@ -67,6 +69,16 @@ public class LandingScreen extends Fragment {
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(getContext().getApplicationContext(),Login.class));
+            }
+        });
+
+
+        FloatingActionButton floatingActionButton=view.findViewById(R.id.userguide);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext().getApplicationContext(),UserGuide.class));
+
             }
         });
     }
