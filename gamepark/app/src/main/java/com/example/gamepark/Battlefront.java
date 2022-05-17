@@ -62,6 +62,13 @@ public class Battlefront extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getContext().stopService(new Intent(getContext(),Reminder.class));
+
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 

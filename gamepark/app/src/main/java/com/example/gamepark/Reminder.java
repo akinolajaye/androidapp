@@ -11,8 +11,15 @@ import android.os.IBinder;
 import android.widget.Toast;
 
 public class Reminder extends Service {
+
+    AlarmManager alarmManager ;
+    PendingIntent  pendingIntent;
     public Reminder() {
+
+
+
     }
+
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -32,13 +39,12 @@ public class Reminder extends Service {
 
        //Toast.makeText(getApplicationContext().,"exited app",Toast.LENGTH_SHORT).show();
         createNotifChannel();
-
+        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent remind_intent = new Intent(Reminder.this,RemindPlay.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(Reminder.this,0,remind_intent,0);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        pendingIntent = PendingIntent.getBroadcast(Reminder.this,0,remind_intent,0);
         long timeAtExit= System.currentTimeMillis();
 
-        long wait=100*10;
+        long wait=1000*10;
         alarmManager.set(AlarmManager.RTC_WAKEUP,timeAtExit+wait,pendingIntent);
         return super.onStartCommand(intent, flags, startId);
     }
@@ -58,5 +64,11 @@ public class Reminder extends Service {
 
 
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        alarmManager.cancel(pendingIntent);
     }
 }
