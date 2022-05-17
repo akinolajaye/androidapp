@@ -45,7 +45,7 @@ public class StartScreen extends Fragment {
         });
     }
 
-    pub
+    
 
 
 }
