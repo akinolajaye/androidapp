@@ -13,6 +13,6 @@ public class UserGuide extends AppCompatActivity {
         setContentView(R.layout.activity_user_guide);
         getSupportActionBar().hide();
         WebView webView = findViewById(R.id.webView);
-        webView.loadUrl("file:///android_asset/guide.html");
+        webView.loadUrl("file:///android_asset/index.html");
     }
 }

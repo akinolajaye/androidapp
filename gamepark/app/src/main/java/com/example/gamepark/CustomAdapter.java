@@ -37,6 +37,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.card_img_deck.setImageBitmap((Bitmap) card_img.get(position));
 
+        //holder.card_img_deck.setOnLongClickListener();
+
     }
 
     @Override
