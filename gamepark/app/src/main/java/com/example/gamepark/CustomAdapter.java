@@ -17,12 +17,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     private Context context;
     private ArrayList card_img;
     public View view;
+
     CustomAdapter(Context context,ArrayList card_img){
 
         this.context=context;
         this.card_img=card_img;
-
-
 
     }
     @NonNull
@@ -36,8 +35,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.card_img_deck.setImageBitmap((Bitmap) card_img.get(position));
-
-        //holder.card_img_deck.setOnLongClickListener();
 
     }
 
@@ -53,7 +50,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            //card_name_deck=itemView.findViewById(R.id.card_deck_char_name);
+
             card_img_deck=itemView.findViewById(R.id.deck_img);
 
 

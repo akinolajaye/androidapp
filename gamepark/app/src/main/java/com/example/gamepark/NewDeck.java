@@ -16,13 +16,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
 public class NewDeck extends Fragment {
     String name_of_deck,stat1_val,stat2_val,stat3_val,stat4_val,stat5_val,stat6_val;
     EditText deck_name,stat1,stat2,stat3,stat4,stat5,stat6;
-    Button submit_btn;
+    ImageView submit_btn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,7 +47,7 @@ public class NewDeck extends Fragment {
         stat6=(EditText) view.findViewById(R.id.stat_6);
         sp= getContext().getSharedPreferences("user_pref", Context.MODE_PRIVATE);
 
-        submit_btn= (Button) view.findViewById(R.id.submit);
+        submit_btn= view.findViewById(R.id.submit_img);
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,22 +65,47 @@ public class NewDeck extends Fragment {
                 editor.commit();
 
 
+                if(name_of_deck.matches("")
+                        || stat1_val.matches("")
+                        || stat2_val.matches("")
+                        || stat3_val.matches("")
+                        || stat4_val.matches("")
+                        || stat5_val.matches("")
+                        || stat6_val.matches("")){
+                    Toast.makeText(getContext(), "Not All Entries Filled", Toast.LENGTH_SHORT).show();
+                }else {
+                    DBHandler myDB= new DBHandler(getContext());
+
+                    try{
+
+                        //myDB.newDeck(name_of_deck,stat1_val,stat2_val, //add table to database
+                               // stat3_val,stat4_val,stat5_val,stat6_val);
+
+                        NavController navController= Navigation.findNavController(view);
+                        navController.navigate((R.id.action_newDeck_to_deckOfCards));
+
+                    }catch (Exception e){
+
+                        Toast.makeText(getContext(), "Database Exists", Toast.LENGTH_SHORT).show();
+                    }
 
 
 
 
 
-               DBHandler myDB= new DBHandler(getContext());
+
+
+                }
 
 
 
-                //myDB.newDeck(name_of_deck,stat1_val,stat2_val, //add table to database
-                    //    stat3_val,stat4_val,stat5_val,stat6_val);
 
 
 
-                NavController navController= Navigation.findNavController(view);
-                navController.navigate((R.id.action_newDeck_to_deckOfCards));
+
+
+
+
 
 
 

@@ -93,7 +93,7 @@ public class CreateCard extends Fragment {
         cursor.moveToNext();//skips the id column
 
         deck_lbl.setText(current_deck_name);
-        for(int i=0;i<card_lbl.size();i++){
+        for(int i=1;i<card_lbl.size();i++){
             card_lbl.get(i).setText(cursor.getString(1));//sets the label to the value gotten from the database
             cursor.moveToNext();
         }
@@ -113,7 +113,7 @@ public class CreateCard extends Fragment {
                 }
         );
 
-        Button get_image= (Button) view.findViewById(R.id.upload);//get button object to upload an image
+        ImageView get_image=view.findViewById(R.id.upload_img);//get button object to upload an image
         get_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,7 +125,7 @@ public class CreateCard extends Fragment {
 
 
 
-        Button addCard = (Button) view.findViewById(R.id.add_char);//listener for button to add character
+        ImageView addCard = view.findViewById(R.id.add_char_img);//listener for button to add character
         addCard.setOnClickListener(new View.OnClickListener() {
 
             @Override

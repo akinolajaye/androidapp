@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -77,7 +78,7 @@ public class DeckOfCards extends Fragment {
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(3, 20, true, 0));
 
 
-        FloatingActionButton add_new_card_btn= (FloatingActionButton) view.findViewById(R.id.floatingActionButton);
+        ImageView add_new_card_btn= view.findViewById(R.id.plus_btn);
         add_new_card_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,7 +87,7 @@ public class DeckOfCards extends Fragment {
             }
         });
 
-        Button play=(Button) view.findViewById(R.id.play_btn);
+        ImageView play= view.findViewById(R.id.play_img);
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,7 +97,7 @@ public class DeckOfCards extends Fragment {
             }
         });
 
-        Button save_deck= (Button) view.findViewById(R.id.save);
+        ImageView save_deck= view.findViewById(R.id.save_img);
         save_deck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
