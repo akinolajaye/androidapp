@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,7 +38,7 @@ public class Register extends AppCompatActivity {
 
     public static final String TAG = "TAG";
     EditText mName,mEmail,mPassword;
-    Button mRegister_btn;
+    ImageView mRegister_btn;
     TextView mLogin_link;
     ProgressBar progressBar;
     FirebaseAuth firebaseAuth;
@@ -58,7 +59,7 @@ public class Register extends AppCompatActivity {
         mName = findViewById(R.id.fullname);
         mEmail=findViewById(R.id.email_register);
         mPassword=findViewById(R.id.password_register);
-        mRegister_btn=findViewById(R.id.register_btn);
+        mRegister_btn=findViewById(R.id.register_img);
         mLogin_link=findViewById(R.id.login_link);
         progressBar=findViewById(R.id.progressBar);
 
