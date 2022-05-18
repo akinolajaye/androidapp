@@ -44,7 +44,7 @@ public class CreateCard extends Fragment {
     ActivityResultLauncher<String> char_pic;//variable for activity launcher to select image
     private ArrayList<TextView> card_lbl= new ArrayList<>(); //array list to hold all text view objects for label
     private ArrayList<EditText> card_stats= new ArrayList<>();//array list to hold all edit view objects for entry
-    private  String char_icon; //string to hold image uri
+    private  String char_icon=""; //string to hold image uri
 
 
     public CreateCard() {
@@ -131,6 +131,20 @@ public class CreateCard extends Fragment {
 
             @Override
             public void onClick(View view) {
+                if(card_stats.get(0).getText().toString().matches("")
+                        || char_icon.matches("")
+                        || card_stats.get(1).getText().toString().matches("")
+                        || card_stats.get(2).getText().toString().matches("")
+                        || card_stats.get(3).getText().toString().matches("")
+                        || card_stats.get(4).getText().toString().matches("")
+                        || card_stats.get(5).getText().toString().matches("")
+                        || card_stats.get(6).getText().toString().matches("")) {
+                    Toast.makeText(getContext(), "Not All Entries Filled", Toast.LENGTH_SHORT).show();
+
+
+                }else{
+
+
 
 
                 //store the label and the entry for a card in a bundle
@@ -156,6 +170,9 @@ public class CreateCard extends Fragment {
 
                 NavController navController= Navigation.findNavController(view);
                 navController.navigate((R.id.action_createCard_to_viewCard));//move to the next page
+
+            }
+
             }
 
         });

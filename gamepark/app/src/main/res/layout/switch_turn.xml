@@ -28,11 +28,11 @@
 
     <TextView
         android:id="@+id/switch_lbl"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="148dp"
         android:text="TextView"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/switch_btn"
         app:layout_constraintEnd_toEndOf="parent"

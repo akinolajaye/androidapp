@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class ViewLibrary extends Fragment {
 
     ArrayList<String> decks;
-    RecyclerView recyclerView;
+
 
 
 
@@ -41,6 +41,8 @@ public class ViewLibrary extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        RecyclerView recyclerView;
+        new PlayBackSound(getContext(),R.raw.zelda);
 
         decks= new ArrayList<>();
 
