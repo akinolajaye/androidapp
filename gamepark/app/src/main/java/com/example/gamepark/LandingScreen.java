@@ -3,6 +3,7 @@ package com.example.gamepark;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -46,10 +48,10 @@ public class LandingScreen extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.d("TAG", Environment.getExternalStorageDirectory().getAbsolutePath());
+        Log.d("TAG", Integer.toString(Build.VERSION.SDK_INT));
         NavController navController=Navigation.findNavController(view);
 
-        Button start=view.findViewById(R.id.new_deck_btn);
+        ImageView start=view.findViewById(R.id.new_deck_img);
         start.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,7 +61,7 @@ public class LandingScreen extends Fragment {
             }
         });
 
-        Button view_lib=view.findViewById(R.id.view_lib_btn);
+        ImageView view_lib=view.findViewById(R.id.view_lib_img);
         view_lib.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,7 +70,7 @@ public class LandingScreen extends Fragment {
             }
         });
 
-        Button logout=view.findViewById(R.id.logout_btn);
+        ImageView logout=view.findViewById(R.id.logout_img);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

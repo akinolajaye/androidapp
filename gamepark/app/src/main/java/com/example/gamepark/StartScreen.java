@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 
 public class StartScreen extends Fragment {
@@ -36,16 +37,17 @@ public class StartScreen extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        new PlayBackSound(getContext(),R.raw.zelda);
+        new PlayBackSound(getContext(),R.raw.zelda);//play background music for the game
 
         NavController navController=Navigation.findNavController(view);
 
-        Button start=view.findViewById(R.id.start_btn);
+
+        ImageView start=view.findViewById(R.id.start_img);
         start.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                navController.navigate((R.id.action_startScreen_to_landingScreen));
+                navController.navigate((R.id.action_startScreen_to_landingScreen));//press start to go to landing screen
 
             }
         });
