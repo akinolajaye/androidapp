@@ -67,6 +67,12 @@ public class CreateCard extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        try{
+
+
+
+
         super.onViewCreated(view, savedInstanceState);
         setupUI(view.findViewById(R.id.whole_card));
 
@@ -180,6 +186,15 @@ public class CreateCard extends Fragment {
             }
 
         });
+
+        }catch (Exception e){
+
+            NavController navController= Navigation.findNavController(view);
+            navController.navigate((R.id.action_createCard_to_landingScreen));//move to the next page
+
+
+
+        }
 
     }
 

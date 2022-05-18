@@ -53,7 +53,7 @@
         android:layout_marginTop="8dp"
         android:text="Winner"
         android:textAlignment="textEnd"
-        android:textColor="@android:color/white"
+        android:textColor="@color/black"
         android:textSize="35sp"
         app:layout_constraintBottom_toTopOf="@+id/winner_reveal"
         app:layout_constraintEnd_toEndOf="parent"

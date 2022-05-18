@@ -100,6 +100,17 @@ public class DeckOfCards extends Fragment {
 
             }
         });
+        ImageView home= view.findViewById(R.id.home_img);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navController= Navigation.findNavController(view);
+                navController.navigate((R.id.action_deckOfCards_to_landingScreen));//move to the next page
+
+            }
+        });
+
+
 
         ImageView save_deck= view.findViewById(R.id.save_img);
         save_deck.setOnClickListener(new View.OnClickListener() {

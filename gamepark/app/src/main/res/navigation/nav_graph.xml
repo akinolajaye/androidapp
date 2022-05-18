@@ -42,6 +42,9 @@
         <action
             android:id="@+id/action_createCard_to_viewCard"
             app:destination="@id/viewCard" />
+        <action
+            android:id="@+id/action_createCard_to_landingScreen"
+            app:destination="@id/landingScreen" />
     </fragment>
     <fragment
         android:id="@+id/viewCard"
@@ -51,6 +54,9 @@
         <action
             android:id="@+id/action_viewCard_to_deckOfCards"
             app:destination="@id/deckOfCards" />
+        <action
+            android:id="@+id/action_viewCard_to_landingScreen"
+            app:destination="@id/landingScreen" />
     </fragment>
     <fragment
         android:id="@+id/deckOfCards"
@@ -63,6 +69,9 @@
         <action
             android:id="@+id/action_deckOfCards_to_battlefront"
             app:destination="@id/battlefront" />
+        <action
+            android:id="@+id/action_deckOfCards_to_landingScreen"
+            app:destination="@id/landingScreen" />
     </fragment>
     <fragment
         android:id="@+id/battlefront"
