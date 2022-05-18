@@ -64,9 +64,6 @@ public class ViewCard extends Fragment {
 
             ;
     private byte[] char_icon;
-    StorageReference storageReference;
-    FirebaseStorage firebaseStorage;
-    FirebaseAuth firebaseAuth;
 
 
     public ViewCard() {
@@ -112,11 +109,6 @@ public class ViewCard extends Fragment {
         SharedPreferences sp=getContext().getApplicationContext().getSharedPreferences("user_pref", Context.MODE_PRIVATE);
         String current_deck_name=sp.getString("deck_name","");
         add_button.setEnabled(false);
-        firebaseStorage=FirebaseStorage.getInstance();
-        storageReference=firebaseStorage.getReference();
-        firebaseAuth = FirebaseAuth.getInstance();
-        StorageReference deck_ref= storageReference.child(firebaseAuth.getCurrentUser().getUid());
-
 
         //gets all the xml text view objects that will store the stats
         final RelativeLayout relativeLayout= view.findViewById(R.id.rlayout);
@@ -248,26 +240,4 @@ public class ViewCard extends Fragment {
         return stream.toByteArray();
     }
 
-
-    private void SaveImage(Bitmap finalBitmap) {
-
-        String root = Environment.getExternalStorageDirectory().toString();
-        File myDir = new File(root + "/Pictures");
-        myDir.mkdirs();
-        Random generator = new Random();
-        int n = 10000;
-        n = generator.nextInt(n);
-        String fname = "Image-"+ n +".jpg";
-        File file = new File (myDir, fname);
-        if (file.exists ()) file.delete ();
-        try {
-            FileOutputStream out = new FileOutputStream(file);
-            finalBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
-            out.flush();
-            out.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

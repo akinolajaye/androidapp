@@ -52,13 +52,18 @@ public class StartMusic extends Service {
         mediaPlayer.release();
 
 
+
     }
+
 
 
 
 
     @Override
     public void onLowMemory() {
+        mediaPlayer.stop();
+        mediaPlayer.release();
+
     }
 
 

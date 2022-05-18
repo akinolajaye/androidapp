@@ -93,6 +93,7 @@ public class CreateCard extends Fragment {
         cursor.moveToNext();//skips the id column
 
         deck_lbl.setText(current_deck_name);
+        cursor.moveToNext();
         for(int i=1;i<card_lbl.size();i++){
             card_lbl.get(i).setText(cursor.getString(1));//sets the label to the value gotten from the database
             cursor.moveToNext();

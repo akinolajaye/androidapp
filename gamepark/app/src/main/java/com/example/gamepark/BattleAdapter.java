@@ -27,7 +27,8 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
     TextView stat_title;
     public Player player;
     public  Player next_player;
-    Button stat1_btn,stat2_btn,stat3_btn,stat4_btn,stat5_btn,stat6_btn,reveal_btn;
+    Button stat1_btn,stat2_btn,stat3_btn,stat4_btn,stat5_btn,stat6_btn;
+    ImageView reveal_btn;
     LayoutInflater  inflater  ;
     public String chosen_stat;
     RecyclerView recyclerView;
@@ -39,7 +40,7 @@ public class BattleAdapter extends RecyclerView.Adapter<BattleAdapter.MyViewHold
 
     BattleAdapter(Context context, Player player , ImageView playing_card_icon,
                   TextView stat_title, Player next_player, RecyclerView recyclerView,
-                  ImageView next_player_icon, Button reveal_btn, NavController navController){
+                  ImageView next_player_icon, ImageView reveal_btn, NavController navController){
         this.context=context;
         inflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.player=player;

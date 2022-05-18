@@ -24,7 +24,8 @@ public class DefenceAdapter extends RecyclerView.Adapter<DefenceAdapter.MyViewHo
     private ArrayList<Card> deck;
     public ImageView playing_card_icon,next_player_icon;
     public Player player,next_player;
-    Button choose_btn,reveal_btn;
+    Button choose_btn;
+    ImageView reveal_btn;
     LayoutInflater inflater  ;
     public String chosen_stat;
     TextView stat_title;
@@ -38,7 +39,7 @@ public class DefenceAdapter extends RecyclerView.Adapter<DefenceAdapter.MyViewHo
 
 
     DefenceAdapter(Context context, Player player , ImageView playing_card_icon, TextView stat_title, Player next_player, RecyclerView recyclerView,
-                   ImageView next_player_icon, String chosen_stat, Button reveal_btn, NavController navController){
+                   ImageView next_player_icon, String chosen_stat, ImageView reveal_btn, NavController navController){
         this.context=context;
         inflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.player=player;

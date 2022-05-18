@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,7 +42,7 @@ import java.nio.channels.FileChannel;
 public class Login extends AppCompatActivity {
 
     EditText mEmail, mPassword;
-    Button mLogin_btn;
+    ImageView mLogin_btn;
     TextView mRegister_link;
     ProgressBar progressBar;
     FirebaseAuth firebaseAuth;
@@ -61,7 +62,7 @@ public class Login extends AppCompatActivity {
 
         mEmail = findViewById(R.id.email_login);
         mPassword = findViewById(R.id.password_login);
-        mLogin_btn = findViewById(R.id.login_btn);
+        mLogin_btn = findViewById(R.id.login_img);
         mRegister_link = findViewById(R.id.register_link);
         progressBar = findViewById(R.id.progressBar2);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -121,7 +122,7 @@ public class Login extends AppCompatActivity {
 
 
                         } else {
-                            Toast.makeText(Login.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT);
+                            Toast.makeText(Login.this, "Wrong Details", Toast.LENGTH_SHORT);
 
 
                         }
@@ -142,34 +143,16 @@ public class Login extends AppCompatActivity {
         });
 
     }
-    private void moveFile(File file, String dir) throws IOException {
-        File newFile = new File(dir);
-        FileChannel outputChannel = null;
-        FileChannel inputChannel = null;
-        try {
-            outputChannel = new FileOutputStream(newFile).getChannel();
-            inputChannel = new FileInputStream(file).getChannel();
-            inputChannel.transferTo(0, inputChannel.size(), outputChannel);
-            inputChannel.close();
-            file.delete();
-        } finally {
-            if (inputChannel != null) inputChannel.close();
-            if (outputChannel != null) outputChannel.close();
-        }
 
-    }
 
     private void downloadDeck() {
-
+        //download deck for the user
         deck_ref= storageReference.child(firebaseAuth.getCurrentUser().getUid());
         deck_ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 String url= uri.toString();
                 downloadFiles(Login.this,"decks",".db", Environment.DIRECTORY_DOWNLOADS,url);
-
-
-
 
             }
         }).addOnFailureListener(new OnFailureListener() {

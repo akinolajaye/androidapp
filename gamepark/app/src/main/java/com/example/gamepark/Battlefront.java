@@ -34,11 +34,10 @@ import java.util.Collections;
 
 public class Battlefront extends Fragment {
 
-    Player jaye=new Player("jaye");
-    Player chris=new Player("chris");
+    Player p1=new Player("Player 1");
+    Player p2=new Player("Player 2");
     public RecyclerView recyclerView;
 
-    public String chosen_stat;
 
 
 
@@ -76,18 +75,18 @@ public class Battlefront extends Fragment {
         ImageView p2_playing_card=view.findViewById(R.id.player2);
 
         TextView stat_title=view.findViewById(R.id.stat_title);
-        Button reveal_btn=view.findViewById(R.id.reveal_btn);
+        ImageView reveal_btn=view.findViewById(R.id.reveal_img);
         new PlayBackSound(getContext(),R.raw.battle);
 
-        setUpDeck(jaye,chris);
+        setUpDeck(p1,p2);
 ;
         BattleAdapter battleAdapter;
         recyclerView=(RecyclerView) view.findViewById(R.id.battlefront_deck_view);
         NavController navController= Navigation.findNavController(view);
-        battleAdapter=new BattleAdapter(getContext(), jaye,p1_playing_card,stat_title,chris,recyclerView,p2_playing_card,reveal_btn,navController);
+        battleAdapter=new BattleAdapter(getContext(), p1,p1_playing_card,stat_title,p2,recyclerView,p2_playing_card,reveal_btn,navController);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(3, 20, true, 0));
-        recyclerView.setAdapter(battleAdapter);
+        recyclerView.setAdapter(battleAdapter);//set the reyclye view to battle adapter
         
 
     }
@@ -102,6 +101,7 @@ public class Battlefront extends Fragment {
 
         ArrayList<Card> Deck=new ArrayList<>();
 
+        //this code splits the arrAY TO TWO AND GIVES CARDS TO EACH PLAYER
         if(cursor.getCount()==0){
 
 

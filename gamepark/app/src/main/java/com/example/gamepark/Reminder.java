@@ -44,7 +44,7 @@ public class Reminder extends Service {
         pendingIntent = PendingIntent.getBroadcast(Reminder.this,0,remind_intent,0);
         long timeAtExit= System.currentTimeMillis();
 
-        long wait=1000*10;
+        long wait=1000*20;
         alarmManager.set(AlarmManager.RTC_WAKEUP,timeAtExit+wait,pendingIntent);
         return super.onStartCommand(intent, flags, startId);
     }
