@@ -47,6 +47,8 @@ public class StartScreen extends Fragment {
             @Override
             public void onClick(View view) {
 
+
+
                 navController.navigate((R.id.action_startScreen_to_landingScreen));//press start to go to landing screen
 
             }

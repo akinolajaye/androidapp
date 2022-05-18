@@ -43,7 +43,7 @@ public class DeckOfCards extends Fragment {
 
 
 
-    private ArrayList<Bitmap> card_img=new ArrayList<>();
+    private ArrayList<Bitmap> card_img;
 
 
     public DeckOfCards() {
@@ -58,9 +58,13 @@ public class DeckOfCards extends Fragment {
         return inflater.inflate(R.layout.fragment_deck_of_cards, container, false);
     }
 
+
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        new PlayBackSound(getContext(),R.raw.zelda);
+        card_img=new ArrayList<>();
 
         firebaseStorage= FirebaseStorage.getInstance();
         storageReference=firebaseStorage.getReference();
@@ -68,7 +72,7 @@ public class DeckOfCards extends Fragment {
         deck_ref= storageReference.child(firebaseAuth.getCurrentUser().getUid());
 
         CustomAdapter customAdapter;
-        RecyclerView recyclerView=(RecyclerView) view.findViewById(R.id.card_deck_view);
+        RecyclerView recyclerView= view.findViewById(R.id.card_deck_view);
         DBHandler myDB=new DBHandler(getContext());
 
         displayData();
